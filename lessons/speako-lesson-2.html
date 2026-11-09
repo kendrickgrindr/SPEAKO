@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Speako — Lesson 2: Self-Introduction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0B2A5B;--teal:#14A3A0;--cream:#F7F5F2;--ink:#2B2F36;--coral:#F47C6B}
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden}
+    body{background:#e5e7e8;color:var(--ink);font-family:Inter,sans-serif}
+    button{font:inherit;cursor:pointer}
+    #deck{position:absolute;left:50%;top:50%;width:1600px;height:900px;overflow:hidden;background:var(--cream);transform:translate(-50%,-50%) scale(var(--scale,1));transform-origin:center;box-shadow:0 30px 90px #0b2a5b25}
+    #deck:before,#deck:after{content:"";position:absolute;pointer-events:none;border-radius:50%;filter:blur(2px)}
+    #deck:before{width:650px;height:650px;right:-210px;top:-300px;background:radial-gradient(circle,#14a3a020,transparent 70%)}
+    #deck:after{width:700px;height:700px;left:-260px;bottom:-370px;background:radial-gradient(circle,#f47c6b1c,transparent 70%)}
+    .track{position:absolute;z-index:5;top:0;left:0;right:0;height:9px;background:#14a3a01c}
+    #progress{height:100%;background:linear-gradient(90deg,var(--teal),var(--coral));transition:width .35s}
+    .wordmark{position:absolute;z-index:4;top:37px;right:70px;font:800 26px Montserrat,sans-serif;letter-spacing:-.05em;color:var(--navy)}
+    .wordmark:after{content:"•";color:var(--coral)}
+    #slide{position:absolute;inset:0;z-index:1;padding:92px 105px 112px;display:flex;flex-direction:column}
+    #slide.fade{animation:appear .32s ease both}@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .eyebrow{font:700 22px Montserrat,sans-serif;color:var(--teal);letter-spacing:.13em;text-transform:uppercase;margin-bottom:19px}
+    h1,h2,h3,p{margin-top:0}h1,h2,h3{font-family:Montserrat,sans-serif;color:var(--navy);line-height:1.13}
+    h1{font-size:88px;letter-spacing:-.055em;margin-bottom:25px}h2{font-size:60px;letter-spacing:-.045em;margin-bottom:23px}h3{font-size:30px;margin-bottom:12px}
+    .subtitle{max-width:1150px;font-size:34px;line-height:1.4}
+    .hero{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:1160px}
+    .accent{width:150px;height:10px;border-radius:20px;background:linear-gradient(90deg,var(--teal),var(--coral));margin-bottom:37px}
+    .card{background:#ffffffed;border:1px solid #0b2a5b12;border-radius:29px;box-shadow:0 15px 40px #0b2a5b12}
+    .main{padding:40px 52px;margin-top:14px}.row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+    .thai{font:600 85px/1.35 "Noto Sans Thai",sans-serif;color:var(--navy);overflow-wrap:anywhere}
+    .thai.md{font-size:51px}.thai.sm{font-size:39px}.thai.xs{font-size:31px}
+    .roman{font-size:34px;line-height:1.35;font-weight:600;color:var(--teal);margin-top:7px}
+    .meaning{font-size:32px;line-height:1.35;margin-top:9px}.roman.small{font-size:23px}.meaning.small{font-size:23px}
+    .listen{display:none;flex:none;border:1px solid #14a3a048;border-radius:99px;background:#e9f8f6;color:#087e7b;padding:10px 16px;font-size:18px;font-weight:700;white-space:nowrap}
+    .speech-ready .listen{display:inline-flex}.listen:hover{background:#d6f1ee}
+    .example{border-top:1px solid #e7eeed;margin-top:26px;padding-top:20px}.example .thai{font-size:42px}.example .roman{font-size:23px}.example .meaning{font-size:24px}
+    .label{color:var(--coral);font:700 19px Montserrat,sans-serif;letter-spacing:.09em;text-transform:uppercase;margin-bottom:10px}
+    .grid{display:grid;gap:18px;margin-top:18px}.two{grid-template-columns:repeat(2,1fr)}.three{grid-template-columns:repeat(3,1fr)}.five{grid-template-columns:repeat(5,1fr)}
+    .review-card{padding:22px 28px;min-height:181px;border:2px dashed #14a3a058;cursor:pointer}.review-card:hover{border-color:var(--teal)}.review-card.done{border-style:solid}
+    .review-card .prompt{font-size:25px;font-weight:700}.review-card .thai{font-size:43px}.review-card .roman{font-size:22px}.hint{font-size:19px;color:var(--teal);margin-top:18px}
+    .reminder{margin-top:auto;padding:17px 24px;border-radius:20px;background:#fff0ec;font-size:23px;line-height:1.5}.reminder strong{color:var(--navy)}.reminder .thai{font-size:27px}
+    table{width:100%;border-spacing:0 12px;margin-top:2px}td{background:white;padding:13px 20px;border-top:1px solid #0b2a5b10;border-bottom:1px solid #0b2a5b10}td:first-child{width:45%;border-radius:17px 0 0 17px;border-left:1px solid #0b2a5b10}td:last-child{border-radius:0 17px 17px 0;border-right:1px solid #0b2a5b10}td .thai{font-size:36px}td .roman,td .meaning{font-size:22px;margin:0}
+    .pattern{padding:34px 38px;min-height:245px}.formula{font-size:31px;font-weight:700;color:var(--navy);margin:8px 0 18px}.change{color:var(--coral)}.pattern .thai{font-size:42px}.pattern .roman{font-size:23px}
+    .country{padding:24px 15px;text-align:center;min-height:215px}.country .row{justify-content:center;gap:5px}.country .thai{font-size:40px}.country .roman{font-size:22px}.country .meaning{font-size:24px}.country .listen{font-size:15px;padding:7px 10px}
+    .placeholder{max-width:760px;margin-top:40px;padding:48px;border:3px dashed #14a3a070}.placeholder .thai{color:#879096}
+    .prompt-big{font-size:37px;font-weight:700;color:var(--navy);margin:13px 0 30px}
+    .action{border:0;border-radius:17px;background:var(--coral);color:white;padding:15px 25px;font-size:23px;font-weight:700;box-shadow:0 9px 22px #f47c6b44}.action:hover{background:#e96757}
+    .answer{padding:22px 30px;margin-top:14px}.answer .thai{font-size:42px}.answer .roman{font-size:23px}.answer .meaning{font-size:23px}
+    .model{padding:23px 30px;margin-top:13px}.model .thai{font-size:41px}.model .roman,.model .meaning{font-size:22px}
+    .dialogue{display:flex;flex-direction:column;gap:11px}.line{display:grid;grid-template-columns:58px 1fr;gap:14px;padding:13px 21px;border-radius:21px;background:white;box-shadow:0 7px 23px #0b2a5b0e}.speaker{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--navy);color:white;font-weight:800;font-size:23px}.line.b .speaker{background:var(--teal)}.line .thai{font-size:31px}.line .roman{font-size:17px;margin:0}
+    .turn{padding:42px 52px;max-width:1050px;margin-top:18px}.turn li{font-size:33px;line-height:1.65}
+    .mini{padding:17px 22px;min-height:135px}.mini .thai{font-size:29px}.mini .roman{font-size:17px}.mini .meaning{font-size:19px}
+    .task{padding:35px 42px;min-height:220px}.pill{display:inline-block;border-radius:99px;background:#e7f8f5;color:#087e7b;padding:10px 16px;font-size:20px;font-weight:700}
+    .footer{position:absolute;z-index:4;left:70px;right:70px;bottom:25px;display:flex;justify-content:space-between;align-items:center;color:#69747c;font-size:19px}.nav{display:flex;align-items:center;gap:13px}.nav button{width:54px;height:54px;border-radius:16px;border:1px solid #0b2a5b25;background:white;color:var(--navy);font-size:26px}.nav button:hover:not(:disabled){background:#e7f8f5}.nav button:disabled{opacity:.3;cursor:default}
+    #notes{display:none;position:absolute;z-index:10;right:40px;bottom:102px;width:490px;max-height:340px;overflow:auto;padding:24px 29px;background:white;border-left:7px solid var(--coral);border-radius:20px;box-shadow:0 20px 55px #0b2a5b30;font-size:22px;line-height:1.45}#notes.open{display:block}#notes strong{display:block;font-family:Montserrat,sans-serif;color:var(--navy);margin-bottom:9px}
+    .roman-hidden .roman{display:none!important}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <div id="deck" aria-label="Speako Thai lesson slide deck">
+    <div class="track"><div id="progress"></div></div>
+    <div class="wordmark">Speako</div>
+    <main id="slide" aria-live="polite"></main>
+    <aside id="notes" aria-label="Teacher notes"></aside>
+    <footer class="footer"><span>← → / Space · T romanization · N notes · F fullscreen</span><div class="nav"><span id="counter"></span><button id="prev" aria-label="Previous slide">←</button><button id="next" aria-label="Next slide">→</button></div></footer>
+  </div>
+  <script>
+    // EDIT LESSON CONTENT HERE. Each object below is one slide.
+    // To personalize the student's country, edit the "yourCountry" entry.
+    const slides = [
+      {type:"title",eyebrow:"Speako · Beginner Thai",title:"Lesson 2: Self-Introduction",subtitle:"Say your name, share where you’re from, and meet someone new.",notes:"Welcome the student. This lesson builds on greetings from Lesson 1."},
+      {type:"review",eyebrow:"Warm-up",title:"Quick review",subtitle:"Say each phrase before you reveal it.",items:[
+        {prompt:"Hello",thai:"สวัสดี",roman:"sà-wàt-dii"},{prompt:"Thank you",thai:"ขอบคุณ",roman:"khàwp-khun"},{prompt:"Sorry",thai:"ขอโทษ",roman:"khǎw-thôot"},{prompt:"How are you?",thai:"สบายดีไหม",roman:"sà-baai-dii mái"}],notes:"Ask for each phrase aloud before revealing. Remind the student: men use ครับ (khráp); women use ค่ะ (khâ) for statements and คะ (khá) for questions."},
+      {type:"goal",eyebrow:"Today’s goal",title:"Introduce yourself in Thai",subtitle:"By the end of this lesson you will be able to introduce yourself in Thai.",notes:"Explain that the student will make a short introduction and practise a cafe conversation."},
+      {type:"vocab",eyebrow:"New word · 1",title:"I · male speaker",thai:"ผม",roman:"phǒm",meaning:"I (male speaker)",example:{thai:"ผมชื่อ...",roman:"phǒm chûue...",meaning:"My name is..."},notes:"Use ผม when the speaker is male. Have the student repeat it slowly."},
+      {type:"vocab",eyebrow:"New word · 2",title:"I · female speaker",thai:"ฉัน",roman:"chǎn",meaning:"I (female speaker)",example:{thai:"ฉันชื่อ...",roman:"chǎn chûue...",meaning:"My name is..."},notes:"Use ฉัน when the speaker is female. Ask which form the student will use."},
+      {type:"vocab",eyebrow:"New word · 3",title:"Name",thai:"ชื่อ",roman:"chûue",meaning:"name",example:{thai:"ผม/ฉันชื่อ...",roman:"phǒm/chǎn chûue...",meaning:"My name is..."},notes:"Model ชื่อ, then let the student say their own name after it."},
+      {type:"summary",eyebrow:"Vocabulary check · 1",title:"Three words so far",items:[{thai:"ผม",roman:"phǒm",meaning:"I (male speaker)"},{thai:"ฉัน",roman:"chǎn",meaning:"I (female speaker)"},{thai:"ชื่อ",roman:"chûue",meaning:"name"}],notes:"Point to the Thai first. Hide romanization with T if the student is ready."},
+      {type:"vocab",eyebrow:"New phrase · 4",title:"My name is…",thai:"ผม/ฉันชื่อ...",roman:"phǒm/chǎn chûue...",meaning:"my name is...",example:{thai:"ผมชื่อ...",roman:"phǒm chûue...",meaning:"My name is... (male speaker)"},notes:"Ask the student to choose ผม or ฉัน, then add their name."},
+      {type:"vocab",eyebrow:"New question · 5",title:"What’s your name?",thai:"คุณชื่ออะไร",roman:"khun chûue à-rai",meaning:"what's your name?",example:{thai:"คุณชื่ออะไรคะ",roman:"khun chûue à-rai khá",meaning:"What’s your name? (female speaker)"},notes:"Ask this question. The student answers with ผม/ฉันชื่อ... Explain the polite question ending คะ."},
+      {type:"vocab",eyebrow:"New phrase · 6",title:"I’m from…",thai:"ผม/ฉันมาจาก...",roman:"phǒm/chǎn maa jàak...",meaning:"I'm from...",example:{thai:"ผม/ฉันมาจากประเทศไทย",roman:"phǒm/chǎn maa jàak bprà-thêet thai",meaning:"I’m from Thailand."},notes:"Use a country as the final part. Invite the student to try their own country."},
+      {type:"summary",eyebrow:"Vocabulary check · 2",title:"Names and origins",items:[{thai:"ผม/ฉันชื่อ...",roman:"phǒm/chǎn chûue...",meaning:"my name is..."},{thai:"คุณชื่ออะไร",roman:"khun chûue à-rai",meaning:"what's your name?"},{thai:"ผม/ฉันมาจาก...",roman:"phǒm/chǎn maa jàak...",meaning:"I'm from..."}],notes:"Ask the question and have the student answer using their name. Repeat with where they are from."},
+      {type:"vocab",eyebrow:"New question · 7",title:"Which country?",thai:"คุณมาจากประเทศอะไร",roman:"khun maa jàak bprà-thêet à-rai",meaning:"which country are you from?",example:{thai:"คุณมาจากประเทศอะไรครับ",roman:"khun maa jàak bprà-thêet à-rai khráp",meaning:"Which country are you from? (male speaker)"},notes:"Break the question into คุณ / มาจาก / ประเทศอะไร. Ask and let the student answer."},
+      {type:"vocab",eyebrow:"New word · 8",title:"Country",thai:"ประเทศ",roman:"bprà-thêet",meaning:"country",example:{thai:"ประเทศไทย",roman:"bprà-thêet thai",meaning:"Thailand"},notes:"Show how ประเทศ joins with a country name."},
+      {type:"vocab",eyebrow:"New phrase · 9",title:"Nice to meet you",thai:"ยินดีที่ได้รู้จัก",roman:"yin-dii thîi dâai rúu-jàk",meaning:"nice to meet you",example:{thai:"ยินดีที่ได้รู้จักครับ",roman:"yin-dii thîi dâai rúu-jàk khráp",meaning:"Nice to meet you. (male speaker)"},notes:"Use this after sharing names. Repeat it in two or three chunks."},
+      {type:"summary",eyebrow:"Vocabulary check · 3",title:"The final three",items:[{thai:"คุณมาจากประเทศอะไร",roman:"khun maa jàak bprà-thêet à-rai",meaning:"which country are you from?"},{thai:"ประเทศ",roman:"bprà-thêet",meaning:"country"},{thai:"ยินดีที่ได้รู้จัก",roman:"yin-dii thîi dâai rúu-jàk",meaning:"nice to meet you"}],notes:"Ask the student to identify the question, single word, and closing phrase."},
+      {type:"patterns",eyebrow:"Build a sentence",title:"Two useful patterns",patterns:[{label:"Your name",before:"Subject + ชื่อ + ",change:"name",thai:"ผม/ฉันชื่อ...",roman:"phǒm/chǎn chûue..."},{label:"Your origin",before:"Subject + มาจาก + ",change:"place",thai:"ผม/ฉันมาจาก...",roman:"phǒm/chǎn maa jàak..."}],notes:"The coral part changes. Ask the student to swap in their name and country."},
+      {type:"comparison",eyebrow:"Choose your pronoun",title:"Male vs female “I”",items:[{thai:"ผม",roman:"phǒm",meaning:"I · male speaker"},{thai:"ฉัน",roman:"chǎn",meaning:"I · female speaker"}],notes:"Ask which pronoun the student will use. The sentence pattern stays the same."},
+      {type:"countries",eyebrow:"Places",title:"Five countries",items:[{thai:"ไทย",roman:"thai",meaning:"Thailand"},{thai:"อเมริกา",roman:"a-mee-ri-gaa",meaning:"America"},{thai:"อังกฤษ",roman:"ang-grìt",meaning:"England"},{thai:"ญี่ปุ่น",roman:"yîi-bpùn",meaning:"Japan"},{thai:"จีน",roman:"jiin",meaning:"China"}],notes:"Say each country once, then let the student repeat. Point in a new order for recall."},
+      {type:"yourCountry",eyebrow:"Make it personal",title:"Your country",thai:"",roman:"",meaning:"",notes:"Before class, edit this slide's thai, roman, and meaning fields in the slides array. If blank, use it as a live spoken prompt."},
+      {type:"drill",eyebrow:"Repeat after me · Round 1 of 5",title:"Ask and answer",prompt:"Ask where someone is from. Answer: Thailand.",answer:[{thai:"คุณมาจากประเทศอะไร",roman:"khun maa jàak bprà-thêet à-rai",meaning:"Which country are you from?"},{thai:"ผม/ฉันมาจากประเทศไทย",roman:"phǒm/chǎn maa jàak bprà-thêet thai",meaning:"I’m from Thailand."}],notes:"Read the question. Have the student answer before revealing. Switch roles."},
+      {type:"drill",eyebrow:"Repeat after me · Round 2 of 5",title:"Ask and answer",prompt:"Ask where someone is from. Answer: America.",answer:[{thai:"คุณมาจากประเทศอะไร",roman:"khun maa jàak bprà-thêet à-rai",meaning:"Which country are you from?"},{thai:"ผม/ฉันมาจากประเทศอเมริกา",roman:"phǒm/chǎn maa jàak bprà-thêet a-mee-ri-gaa",meaning:"I’m from America."}],notes:"Student speaks first. Reveal and repeat at a natural pace."},
+      {type:"drill",eyebrow:"Repeat after me · Round 3 of 5",title:"Ask and answer",prompt:"Ask where someone is from. Answer: England.",answer:[{thai:"คุณมาจากประเทศอะไร",roman:"khun maa jàak bprà-thêet à-rai",meaning:"Which country are you from?"},{thai:"ผม/ฉันมาจากประเทศอังกฤษ",roman:"phǒm/chǎn maa jàak bprà-thêet ang-grìt",meaning:"I’m from England."}],notes:"Encourage a complete sentence with the student's chosen pronoun."},
+      {type:"drill",eyebrow:"Repeat after me · Round 4 of 5",title:"Ask and answer",prompt:"Ask where someone is from. Answer: Japan.",answer:[{thai:"คุณมาจากประเทศอะไร",roman:"khun maa jàak bprà-thêet à-rai",meaning:"Which country are you from?"},{thai:"ผม/ฉันมาจากประเทศญี่ปุ่น",roman:"phǒm/chǎn maa jàak bprà-thêet yîi-bpùn",meaning:"I’m from Japan."}],notes:"Ask the student to speak first, then reveal for a quick check."},
+      {type:"drill",eyebrow:"Repeat after me · Round 5 of 5",title:"Ask and answer",prompt:"Ask where someone is from. Answer: China.",answer:[{thai:"คุณมาจากประเทศอะไร",roman:"khun maa jàak bprà-thêet à-rai",meaning:"Which country are you from?"},{thai:"ผม/ฉันมาจากประเทศจีน",roman:"phǒm/chǎn maa jàak bprà-thêet jiin",meaning:"I’m from China."}],notes:"Finish with a fast exchange without reading the romanization."},
+      {type:"model",eyebrow:"Put it all together",title:"A full self-introduction",versions:[{label:"Male speaker",thai:"สวัสดีครับ ผมชื่อ... ผมมาจากประเทศ... ยินดีที่ได้รู้จักครับ",roman:"sà-wàt-dii khráp · phǒm chûue... · phǒm maa jàak bprà-thêet... · yin-dii thîi dâai rúu-jàk khráp",meaning:"Hello. My name is... I’m from... Nice to meet you."},{label:"Female speaker",thai:"สวัสดีค่ะ ฉันชื่อ... ฉันมาจากประเทศ... ยินดีที่ได้รู้จักค่ะ",roman:"sà-wàt-dii khâ · chǎn chûue... · chǎn maa jàak bprà-thêet... · yin-dii thîi dâai rúu-jàk khâ",meaning:"Hello. My name is... I’m from... Nice to meet you."}],notes:"Read the appropriate version aloud. Have the student replace the blanks with their name and country."},
+      {type:"roleplay",eyebrow:"Cafe role-play",title:"Meeting someone new",lines:[{speaker:"A",thai:"สวัสดีครับ/ค่ะ ผม/ฉันชื่อ... คุณชื่ออะไรครับ/คะ",roman:"sà-wàt-dii khráp/khâ · phǒm/chǎn chûue... · khun chûue à-rai khráp/khá"},{speaker:"B",thai:"ผม/ฉันชื่อ... ยินดีที่ได้รู้จักครับ/ค่ะ",roman:"phǒm/chǎn chûue... · yin-dii thîi dâai rúu-jàk khráp/khâ"},{speaker:"A",thai:"คุณมาจากประเทศอะไรครับ/คะ",roman:"khun maa jàak bprà-thêet à-rai khráp/khá"},{speaker:"B",thai:"ผม/ฉันมาจาก...",roman:"phǒm/chǎn maa jàak..."}],notes:"Reveal one line at a time. Play A while the student plays B, then switch. Men use ครับ (khráp); women use ค่ะ (khâ) for statements and คะ (khá) for questions."},
+      {type:"yourTurn",eyebrow:"Independent speaking",title:"Your turn",subtitle:"Introduce yourself with your name and country.",prompts:["Say hello.","Say your name.","Say which country you’re from.","Finish with ‘nice to meet you.’"],notes:"Let the student speak without interruption, then give one or two focused corrections."},
+      {type:"recap",eyebrow:"What you learned",title:"Lesson 2 recap",items:[{thai:"ผม",roman:"phǒm",meaning:"I (male speaker)"},{thai:"ฉัน",roman:"chǎn",meaning:"I (female speaker)"},{thai:"ชื่อ",roman:"chûue",meaning:"name"},{thai:"ผม/ฉันชื่อ...",roman:"phǒm/chǎn chûue...",meaning:"my name is..."},{thai:"คุณชื่ออะไร",roman:"khun chûue à-rai",meaning:"what's your name?"},{thai:"ผม/ฉันมาจาก...",roman:"phǒm/chǎn maa jàak...",meaning:"I'm from..."},{thai:"คุณมาจากประเทศอะไร",roman:"khun maa jàak bprà-thêet à-rai",meaning:"which country are you from?"},{thai:"ประเทศ",roman:"bprà-thêet",meaning:"country"},{thai:"ยินดีที่ได้รู้จัก",roman:"yin-dii thîi dâai rúu-jàk",meaning:"nice to meet you"}],notes:"Ask the student to read or explain as many as they can. Hide romanization with T."},
+      {type:"homework",eyebrow:"After class",title:"Homework",tasks:["Write 3 self-introduction sentences.","Practice the full introduction aloud."],notes:"Suggest a short voice recording for their own practice, if useful."},
+      {type:"closing",eyebrow:"Speako · Lesson 2 complete",title:"Great work!",subtitle:"See you next lesson!",notes:"Praise one specific improvement from today's lesson."}
+    ];
+
+    const deck=document.getElementById("deck"),slideEl=document.getElementById("slide"),counter=document.getElementById("counter"),progress=document.getElementById("progress"),notesEl=document.getElementById("notes"),prev=document.getElementById("prev"),next=document.getElementById("next");
+    let current=0,romanVisible=true,notesVisible=false,thaiVoice=null;
+    const state={};
+    const esc=(value="")=>String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c]);
+    const listen=t=>`<button class="listen" data-speak="${esc(t)}" aria-label="Listen to ${esc(t)}">▶ Listen</button>`;
+    const thai=(t,size="")=>`<div class="row"><span class="thai ${size}">${esc(t)}</span>${listen(t)}</div>`;
+    const word=(item,size="")=>`${thai(item.thai,size)}<div class="roman">${esc(item.roman)}</div><div class="meaning">${esc(item.meaning)}</div>`;
+    const head=s=>`<div class="eyebrow">${esc(s.eyebrow)}</div><h2>${esc(s.title)}</h2>`;
+    const reminder=()=>`<div class="reminder"><strong>Politeness reminder</strong> · Men: <span class="thai">ครับ</span> (khráp). Women: <span class="thai">ค่ะ</span> (khâ) for statements; <span class="thai">คะ</span> (khá) for questions.</div>`;
+
+    function content(s,st){
+      switch(s.type){
+        case "title":case "goal":case "closing":return `<div class="hero"><div class="accent"></div><div class="eyebrow">${esc(s.eyebrow)}</div><h1>${esc(s.title)}</h1><p class="subtitle">${esc(s.subtitle)}</p></div>`;
+        case "review":return `${head(s)}<p class="subtitle">${esc(s.subtitle)}</p><div class="grid two">${s.items.map((x,i)=>{let shown=st.revealed?.includes(i);return `<div class="card review-card ${shown?"done":""}" data-reveal="${i}" role="button" tabindex="0"><div class="prompt">${esc(x.prompt)}</div>${shown?`${thai(x.thai,"md")}<div class="roman">${esc(x.roman)}</div>`:`<div class="hint">Click to reveal Thai</div>`}</div>`}).join("")}</div>${reminder()}`;
+        case "vocab":return `${head(s)}<div class="card main">${word(s)}<div class="example"><div class="label">In a sentence</div>${thai(s.example.thai,"md")}<div class="roman">${esc(s.example.roman)}</div><div class="meaning">${esc(s.example.meaning)}</div></div></div>`;
+        case "summary":return `${head(s)}<table aria-label="Vocabulary summary"><tbody>${s.items.map(x=>`<tr><td>${thai(x.thai,"sm")}</td><td><div class="roman">${esc(x.roman)}</div></td><td><div class="meaning">${esc(x.meaning)}</div></td></tr>`).join("")}</tbody></table>`;
+        case "patterns":return `${head(s)}<div class="grid two">${s.patterns.map(x=>`<div class="card pattern"><div class="label">${esc(x.label)}</div><div class="formula">${esc(x.before)}<span class="change">${esc(x.change)}</span></div>${thai(x.thai,"md")}<div class="roman">${esc(x.roman)}</div></div>`).join("")}</div>`;
+        case "comparison":return `${head(s)}<div class="grid two">${s.items.map(x=>`<div class="card main">${word(x)}</div>`).join("")}</div><div class="reminder"><strong>Choose the form that fits you.</strong> Then use it in both sentence patterns.</div>`;
+        case "countries":return `${head(s)}<div class="grid five">${s.items.map(x=>`<div class="card country">${word(x,"sm")}</div>`).join("")}</div><div class="reminder">Try the pattern: <strong>ผม/ฉันมาจากประเทศ...</strong></div>`;
+        case "yourCountry":return `${head(s)}<p class="subtitle">Add the country you want to say in your introduction.</p><div class="card placeholder">${s.thai&&s.roman&&s.meaning?word(s):`<div class="thai">ประเทศ...</div><div class="roman">bprà-thêet...</div><div class="meaning">Your country</div>`}</div>`;
+        case "drill":return `${head(s)}<div class="card main"><div class="label">English prompt</div><div class="prompt-big">${esc(s.prompt)}</div>${st.revealed?s.answer.map(x=>`<div class="card answer">${word(x,"md")}</div>`).join(""):`<button class="action" data-action="reveal">Reveal Thai answer</button>`}</div>`;
+        case "model":return `${head(s)}${s.versions.map(x=>`<div class="card model"><div class="label">${esc(x.label)}</div>${word(x,"md")}</div>`).join("")}`;
+        case "roleplay":{let count=st.lineCount||1;return `${head(s)}<div class="dialogue">${s.lines.slice(0,count).map(x=>`<div class="line ${x.speaker.toLowerCase()}"><div class="speaker">${esc(x.speaker)}</div><div>${thai(x.thai,"xs")}<div class="roman">${esc(x.roman)}</div></div></div>`).join("")}</div>${count<s.lines.length?`<button class="action" style="align-self:flex-start;margin-top:13px" data-action="nextLine">Show next line →</button>`:reminder()}`}
+        case "yourTurn":return `${head(s)}<p class="subtitle">${esc(s.subtitle)}</p><div class="card turn"><ol>${s.prompts.map(x=>`<li>${esc(x)}</li>`).join("")}</ol></div>`;
+        case "recap":return `${head(s)}<div class="grid three">${s.items.map(x=>`<div class="card mini">${thai(x.thai,"xs")}<div class="roman">${esc(x.roman)}</div><div class="meaning">${esc(x.meaning)}</div></div>`).join("")}</div>`;
+        case "homework":return `${head(s)}<div class="grid two">${s.tasks.map((x,i)=>`<div class="card task"><div class="pill">Task ${i+1}</div><p class="subtitle" style="margin:30px 0 0">${esc(x)}</p></div>`).join("")}</div>`;
+      }
+      return "";
+    }
+    function render(animate=true){let s=slides[current],st=state[current]||(state[current]={});slideEl.innerHTML=content(s,st);slideEl.classList.remove("fade");if(animate){void slideEl.offsetWidth;slideEl.classList.add("fade")}counter.textContent=`${current+1} / ${slides.length}`;progress.style.width=`${(current+1)/slides.length*100}%`;prev.disabled=current===0;next.disabled=current===slides.length-1;notesEl.innerHTML=`<strong>Teacher notes</strong>${esc(s.notes||"")}`;notesEl.classList.toggle("open",notesVisible);deck.classList.toggle("roman-hidden",!romanVisible)}
+    function go(index){index=Math.max(0,Math.min(slides.length-1,index));if(index===current)return;if("speechSynthesis" in window)speechSynthesis.cancel();current=index;render()}
+    function voices(){if(!("speechSynthesis" in window))return;thaiVoice=speechSynthesis.getVoices().find(v=>v.lang.toLowerCase().startsWith("th"))||null;deck.classList.toggle("speech-ready",!!thaiVoice)}
+    function speak(text){if(!thaiVoice)return;speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang="th-TH";u.voice=thaiVoice;u.rate=.85;speechSynthesis.speak(u)}
+    function scale(){deck.style.setProperty("--scale",Math.min(innerWidth/1600,innerHeight/900))}
+    async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){console.warn("Fullscreen unavailable",e)}}
+    slideEl.addEventListener("click",e=>{let b=e.target.closest("[data-speak]");if(b){e.stopPropagation();speak(b.dataset.speak);return}let r=e.target.closest("[data-reveal]");if(r){let st=state[current];st.revealed||=[];let n=Number(r.dataset.reveal);if(!st.revealed.includes(n))st.revealed.push(n);render(false);return}let a=e.target.closest("[data-action]")?.dataset.action;if(a==="reveal"){state[current].revealed=true;render(false)}else if(a==="nextLine"){state[current].lineCount=Math.min(slides[current].lines.length,(state[current].lineCount||1)+1);render(false)}});
+    slideEl.addEventListener("keydown",e=>{let r=e.target.closest("[data-reveal]");if(r&&(e.key==="Enter"||e.key===" ")){e.preventDefault();r.click()}});
+    prev.addEventListener("click",()=>go(current-1));next.addEventListener("click",()=>go(current+1));
+    document.addEventListener("keydown",e=>{let k=e.key.toLowerCase();if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){if(e.target.matches("button,[role=button]"))return;e.preventDefault();go(current+1)}else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(current-1)}else if(k==="t"){romanVisible=!romanVisible;render(false)}else if(k==="n"){notesVisible=!notesVisible;render(false)}else if(k==="f")fullscreen()});
+    let startX=0,startY=0;deck.addEventListener("touchstart",e=>{startX=e.changedTouches[0].screenX;startY=e.changedTouches[0].screenY},{passive:true});deck.addEventListener("touchend",e=>{let dx=e.changedTouches[0].screenX-startX,dy=e.changedTouches[0].screenY-startY;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy))go(current+(dx<0?1:-1))},{passive:true});
+    addEventListener("resize",scale);if("speechSynthesis" in window){speechSynthesis.addEventListener?.("voiceschanged",voices);voices()}scale();render(false);
+  </script>
+</body>
+</html>

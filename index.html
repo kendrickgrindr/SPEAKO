@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speako Languages — Sign In to Your Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-portal="login">
+
+  <!-- Minimalist Apple Top Bar -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="brand-logo" href="index.html">
+        <img src="Speako logo.png" alt="Speako" />
+        <span class="brand-wordmark">Speako</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="pill-tag"><span class="live-dot"></span> Live 1-on-1 Thai &amp; English</span>
+        <a href="https://speakolanguages.com/#pricing" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Official Site ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Gateway Container -->
+  <main id="app-main" class="login-shell"></main>
+
+  <!-- Apple Sheet Modal -->
+  <div id="modal-backdrop" class="modal-backdrop" onclick="if(event.target===this) closeModal()">
+    <div id="modal-sheet" class="modal-sheet"></div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

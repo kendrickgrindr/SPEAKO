@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speako — Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-portal="admin">
+
+  <!-- iOS 27 Liquid Glass Admin Navigation -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-logo" onclick="switchTab('accounts')">
+          <img src="Speako logo.png" alt="Speako" />
+          <span class="brand-wordmark">Speako</span>
+        </div>
+        <span class="role-portal-badge admin">Admin</span>
+      </div>
+
+      <nav class="segmented-nav" aria-label="Admin Navigation">
+        <button class="seg-btn active" data-tab="accounts" onclick="switchTab('accounts')">Accounts</button>
+        <button class="seg-btn" data-tab="schedules" onclick="switchTab('schedules')">Schedule</button>
+        <button class="seg-btn" data-tab="teachers" onclick="switchTab('teachers')">Teachers</button>
+        <button class="seg-btn" data-tab="invoices" onclick="switchTab('invoices')">Invoices</button>
+        <button class="seg-btn" data-tab="alerts" onclick="switchTab('alerts')">Alerts <span id="admin-unread-badge"></span></button>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="account-pill" style="cursor:default;">
+          <div class="avatar-circle" id="nav-avatar" style="background:#B91C1C;">KA</div>
+          <span class="account-pill-text" id="nav-user-name">Kendrick</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="signOut()">Exit</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app-main" class="container"></main>
+
+  <div id="modal-backdrop" class="modal-backdrop" onclick="if(event.target===this) closeModal()">
+    <div id="modal-sheet" class="modal-sheet"></div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

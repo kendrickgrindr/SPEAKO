@@ -1,0 +1,2363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B2A5B">
+  <title>Speako — Lesson 1: Greetings and Polite Words</title>
+
+  <script>
+    /*
+     * EDIT YOUR LESSON HERE.
+     * All lesson content lives in this array.
+     * Summaries, practice answers, and the recap reuse vocabulary IDs.
+     * Romanization is preserved exactly as supplied.
+     */
+    const SLIDES = [
+      {
+        id: "welcome",
+        type: "title",
+        eyebrow: "BEGINNER THAI · LIVE 1-ON-1",
+        title: "Lesson 1: Greetings and Polite Words",
+        subtitle: "A few friendly words. Your first real conversation.",
+        chips: ["Listen", "Try", "Connect"],
+        wordId: "hello",
+        notes: [
+          "Welcome the student by name. Explain that this is a conversation, not a test.",
+          "Allow about 45–50 minutes, adjusting the pace to the student."
+        ]
+      },
+      {
+        id: "goal",
+        type: "goal",
+        eyebrow: "TODAY’S GOAL",
+        title: "Small steps. Real conversation.",
+        statement: "By the end of this lesson you will be able to greet people politely in Thai",
+        outcomes: [
+          { title: "Say hello", text: "Start a friendly conversation." },
+          { title: "Sound polite", text: "Choose a polite ending." },
+          { title: "Take a turn", text: "Ask, answer, and thank someone." }
+        ],
+        notes: [
+          "Read the goal together. Keep the emphasis on communication rather than perfection.",
+          "Tell the student they will try two short conversations before the end."
+        ]
+      },
+      {
+        id: "warmup",
+        type: "warmup",
+        eyebrow: "LET’S MAKE THIS PERSONAL",
+        title: "What do you want to use Thai for?",
+        subtitle: "English is welcome. Tell your teacher about one real situation.",
+        options: [
+          { title: "Travel", text: "Shops, cafés, and meeting people." },
+          { title: "Life in Thailand", text: "Neighbours and everyday conversations." },
+          { title: "Work & daily life", text: "Friendly connections during your day." }
+        ],
+        footer: "Choose one—or tell us your own reason.",
+        notes: [
+          "Ask one follow-up question about the student’s plans or daily life.",
+          "Reuse their situation in the role-plays. Click a card if you want to mark their choice."
+        ]
+      },
+      {
+        id: "hello",
+        type: "word",
+        eyebrow: "VOCABULARY · 1 OF 12",
+        title: "Start with a friendly hello",
+        thai: "สวัสดี",
+        roman: "sa-wat-dii",
+        meaning: "hello / goodbye",
+        cue: "Use it when you meet someone. It can also be a polite goodbye.",
+        example: {
+          context: "Greeting someone you have just met",
+          thai: "สวัสดีครับ",
+          roman: "sa-wat-dii khráp",
+          meaning: "Hello. (male speaker)"
+        },
+        notes: [
+          "Model the whole phrase, then invite two relaxed repetitions.",
+          "The written romanization is a support; encourage the student to follow your sound."
+        ]
+      },
+      {
+        id: "male-particle",
+        type: "word",
+        eyebrow: "VOCABULARY · 2 OF 12",
+        title: "A polite ending for male speakers",
+        thai: "ครับ",
+        roman: "khráp",
+        meaning: "polite particle (male speakers)",
+        cue: "Male speakers use this ending with both statements and questions.",
+        example: {
+          context: "Thanking someone politely",
+          thai: "ขอบคุณครับ",
+          roman: "khòop-khun khráp",
+          meaning: "Thank you. (male speaker)"
+        },
+        notes: [
+          "Explain that this is a polite ending, not a separate English word.",
+          "The ending follows the speaker, not the person being addressed."
+        ]
+      },
+      {
+        id: "female-statement",
+        type: "word",
+        eyebrow: "VOCABULARY · 3 OF 12",
+        title: "A polite ending for statements",
+        thai: "ค่ะ",
+        roman: "khâ",
+        meaning: "polite particle (female speakers, statements)",
+        cue: "Female speakers use this falling-tone ending for statements.",
+        example: {
+          context: "Thanking someone politely",
+          thai: "ขอบคุณค่ะ",
+          roman: "khòop-khun khâ",
+          meaning: "Thank you. (female speaker)"
+        },
+        notes: [
+          "Use a gentle downward hand movement to model the falling tone.",
+          "Introduce the sound without asking for perfect tone control yet."
+        ]
+      },
+      {
+        id: "female-question",
+        type: "word",
+        eyebrow: "VOCABULARY · 4 OF 12",
+        title: "A polite ending for questions",
+        thai: "คะ",
+        roman: "khá",
+        meaning: "polite particle (female speakers, questions)",
+        cue: "Female speakers use this high-tone ending for questions.",
+        example: {
+          context: "Asking someone how they are",
+          thai: "สบายดีไหมคะ",
+          roman: "sa-baai dii mái khá",
+          meaning: "How are you? (female speaker)"
+        },
+        notes: [
+          "Contrast the high-tone question ending with the falling-tone statement ending.",
+          "Let the student hear the difference before asking them to produce it."
+        ]
+      },
+      {
+        id: "summary-1",
+        type: "summary",
+        eyebrow: "QUICK CHECK · WORDS 1–4",
+        title: "Your first four building blocks",
+        subtitle: "Say hello, then choose a polite ending.",
+        wordIds: ["hello", "male-particle", "female-statement", "female-question"],
+        footer: "Teacher challenge: hide pronunciation with T.",
+        notes: [
+          "Point to each item in a different order and invite the student to say it.",
+          "Ask which ending they want to practise using."
+        ]
+      },
+      {
+        id: "thank-you",
+        type: "word",
+        eyebrow: "VOCABULARY · 5 OF 12",
+        title: "A little appreciation",
+        thai: "ขอบคุณ",
+        roman: "khòop-khun",
+        meaning: "thank you",
+        cue: "Add your polite ending when someone helps you.",
+        example: {
+          context: "Receiving your drink at a café",
+          thai: "ขอบคุณค่ะ",
+          roman: "khòop-khun khâ",
+          meaning: "Thank you. (female speaker)"
+        },
+        notes: [
+          "Pretend to hand the student a drink and invite a thank-you.",
+          "Practise once slowly, then at a comfortable conversational pace."
+        ]
+      },
+      {
+        id: "sorry",
+        type: "word",
+        eyebrow: "VOCABULARY · 6 OF 12",
+        title: "Sorry—or excuse me",
+        thai: "ขอโทษ",
+        roman: "khǎaw-thôot",
+        meaning: "sorry / excuse me",
+        cue: "Use it for a small mistake or to politely get someone’s attention.",
+        example: {
+          context: "Getting someone’s attention politely",
+          thai: "ขอโทษครับ",
+          roman: "khǎaw-thôot khráp",
+          meaning: "Excuse me. (male speaker)"
+        },
+        notes: [
+          "Give two quick contexts: getting attention and accidentally bumping into someone.",
+          "Model the whole phrase before breaking it into smaller sounds."
+        ]
+      },
+      {
+        id: "no-problem",
+        type: "word",
+        eyebrow: "VOCABULARY · 7 OF 12",
+        title: "Keep it friendly",
+        thai: "ไม่เป็นไร",
+        roman: "mâi bpen rai",
+        meaning: "it's okay / no problem",
+        cue: "A reassuring response when someone apologises.",
+        example: {
+          context: "Responding to a small accident",
+          thai: "ไม่เป็นไรค่ะ",
+          roman: "mâi bpen rai khâ",
+          meaning: "It’s okay. (female speaker)"
+        },
+        notes: [
+          "Apologise for an imaginary small accident and let the student respond.",
+          "Keep the rhythm relaxed and connected."
+        ]
+      },
+      {
+        id: "how-are-you",
+        type: "word",
+        eyebrow: "VOCABULARY · 8 OF 12",
+        title: "Keep the conversation going",
+        thai: "สบายดีไหม",
+        roman: "sa-baai dii mái",
+        meaning: "how are you?",
+        cue: "Ask this after saying hello.",
+        example: {
+          context: "Checking in with someone",
+          thai: "สบายดีไหมครับ",
+          roman: "sa-baai dii mái khráp",
+          meaning: "How are you? (male speaker)"
+        },
+        notes: [
+          "Use the supplied romanization and model natural conversational pronunciation.",
+          "The question particle may sound high in conversational speech; its spelling is shown again in the tone demonstration."
+        ]
+      },
+      {
+        id: "summary-2",
+        type: "summary",
+        eyebrow: "QUICK CHECK · WORDS 5–8",
+        title: "Four phrases for everyday kindness",
+        subtitle: "Which phrase fits each situation?",
+        wordIds: ["thank-you", "sorry", "no-problem", "how-are-you"],
+        footer: "A helpful person. A small accident. A friendly conversation.",
+        notes: [
+          "Describe a situation in English and have the student choose the right phrase.",
+          "Ask for the phrase plus their preferred polite ending when they are ready."
+        ]
+      },
+      {
+        id: "fine",
+        type: "word",
+        eyebrow: "VOCABULARY · 9 OF 12",
+        title: "A simple answer",
+        thai: "สบายดี",
+        roman: "sa-baai dii",
+        meaning: "I'm fine",
+        cue: "Use this to answer “how are you?”",
+        example: {
+          context: "Answering a friendly check-in",
+          thai: "สบายดีค่ะ",
+          roman: "sa-baai dii khâ",
+          meaning: "I’m fine. (female speaker)"
+        },
+        notes: [
+          "Ask how the student is and wait for their answer without rushing.",
+          "Repeat the question-and-answer exchange twice."
+        ]
+      },
+      {
+        id: "and-you",
+        type: "word",
+        eyebrow: "VOCABULARY · 10 OF 12",
+        title: "Give the conversation back",
+        thai: "แล้วคุณล่ะ",
+        roman: "láew khun lâ",
+        meaning: "and you?",
+        cue: "Answer first, then invite the other person to speak.",
+        example: {
+          context: "Returning the question",
+          thai: "สบายดี แล้วคุณล่ะ",
+          roman: "sa-baai dii · láew khun lâ",
+          meaning: "I’m fine. And you?"
+        },
+        notes: [
+          "Practise the answer and return question as one conversational turn.",
+          "Use a small open-hand gesture to show that the turn goes back to the other person."
+        ]
+      },
+      {
+        id: "yes-no",
+        type: "word",
+        eyebrow: "VOCABULARY · 11 OF 12",
+        title: "Confirm—or correct",
+        thai: "ใช่ / ไม่ใช่",
+        roman: "châi / mâi châi",
+        meaning: "yes (it is) / no (it isn't)",
+        cue: "Use these to confirm whether something is correct—not for every yes/no question.",
+        example: {
+          context: "Confirming or correcting a detail",
+          thai: "ใช่ครับ / ไม่ใช่ครับ",
+          roman: "châi khráp / mâi châi khráp",
+          meaning: "Yes, it is. / No, it isn’t. (male speaker)"
+        },
+        notes: [
+          "Explain that Thai often answers yes/no questions by repeating the relevant verb or adjective.",
+          "For today, use these forms only to confirm or correct a statement."
+        ]
+      },
+      {
+        id: "goodbye",
+        type: "word",
+        eyebrow: "VOCABULARY · 12 OF 12",
+        title: "A word for goodbye",
+        thai: "ลาก่อน",
+        roman: "laa gàawn",
+        meaning: "goodbye",
+        cue: "This can sound like a longer or more final farewell.",
+        example: {
+          context: "Saying farewell before a long separation",
+          thai: "ลาก่อน",
+          roman: "laa gàawn",
+          meaning: "Goodbye."
+        },
+        notes: [
+          "Explain that this can sound final and is less usual for an everyday casual goodbye.",
+          "Remind the student that the hello phrase also works as a polite everyday goodbye."
+        ]
+      },
+      {
+        id: "summary-3",
+        type: "summary",
+        eyebrow: "QUICK CHECK · WORDS 9–12",
+        title: "Answer, return, and finish",
+        subtitle: "You can now keep a short exchange moving.",
+        wordIds: ["fine", "and-you", "yes-no", "goodbye"],
+        footer: "Try the meanings first. Then say the Thai.",
+        notes: [
+          "Ask the student to connect “I’m fine” with “and you?”",
+          "Check that the yes/no pair is understood as confirmation, not a universal answer."
+        ]
+      },
+      {
+        id: "wai",
+        type: "wai",
+        eyebrow: "LANGUAGE + CULTURE",
+        title: "The wai: a greeting with your hands",
+        visual: "🙏",
+        steps: [
+          "Bring your palms together.",
+          "Raise your fingertips near your nose.",
+          "Give a small, gentle nod.",
+          "Say hello with a polite ending."
+        ],
+        footer: "Keep your shoulders relaxed and follow your teacher’s example.",
+        wordId: "hello",
+        notes: [
+          "Demonstrate slowly on camera and invite the student to mirror you.",
+          "Explain that hand height and when to wai depend on the social situation; this is a simple introductory model."
+        ]
+      },
+      {
+        id: "particles",
+        type: "particles",
+        eyebrow: "THE POLITENESS PATTERN",
+        title: "A small ending makes it polite",
+        subtitle: "Put the polite particle at the end of your phrase.",
+        cards: [
+          { label: "Men · statements + questions", wordId: "male-particle" },
+          { label: "Women · statements", wordId: "female-statement" },
+          { label: "Women · questions", wordId: "female-question" }
+        ],
+        footer: "Choose the ending for you—not for the person you are speaking to.",
+        notes: [
+          "For this beginner lesson: men use the same ending for statements and questions; women use the two different endings.",
+          "Let the student choose the ending that fits how they want to speak."
+        ]
+      },
+      {
+        id: "tones",
+        type: "tones",
+        eyebrow: "MINI TONE LESSON · 1 OF 2",
+        title: "Thai has 5 tones",
+        subtitle: "The pitch pattern is part of the word. Watch, listen, then copy.",
+        tones: [
+          { id: "mid", label: "Mid", cue: "Steady in the middle", color: "#14A3A0", path: "M12 38 L108 38" },
+          { id: "low", label: "Low", cue: "Settle into a low pitch", color: "#0B2A5B", path: "M12 39 Q45 55 108 56" },
+          { id: "falling", label: "Falling", cue: "Start high, then fall", color: "#F47C6B", path: "M12 26 Q38 12 52 22 L108 60" },
+          { id: "high", label: "High", cue: "Move toward a high pitch", color: "#657BA8", path: "M12 43 Q50 50 108 15" },
+          { id: "rising", label: "Rising", cue: "Dip low, then rise", color: "#238878", path: "M12 40 Q49 79 108 14" }
+        ],
+        footer: "These lines are simplified pitch guides—not exact musical notes.",
+        notes: [
+          "Use your hand to trace each pitch shape while modelling a simple sound.",
+          "Start with listening and imitation. Do not turn this into a spelling lesson."
+        ]
+      },
+      {
+        id: "mai-tones",
+        type: "tone-examples",
+        eyebrow: "MINI TONE LESSON · 2 OF 2",
+        title: "Same “mai” sound, different tones",
+        subtitle: "Listen to the pitch. Trace the line with your hand.",
+        examples: [
+          { thai: "ไม", roman: "mai", meaning: "mid tone", toneId: "mid" },
+          { thai: "ไม่", roman: "mâi", meaning: "falling tone", toneId: "falling" },
+          { thai: "ไม้", roman: "mái", meaning: "high tone", toneId: "high" },
+          { thai: "ไหม", roman: "mǎi", meaning: "rising tone", toneId: "rising" }
+        ],
+        footer: "Now copy your teacher’s low-tone “mai” sound—no extra word to memorise.",
+        notes: [
+          "These four spellings are the supplied sound demonstrations, not four additional vocabulary targets.",
+          "Model the fifth, low tone orally. Use your own voice as the reference if synthetic audio sounds unclear."
+        ]
+      },
+      {
+        id: "drill-hello",
+        type: "drill",
+        eyebrow: "PRACTICE · 1 OF 3",
+        title: "Repeat after me",
+        subtitle: "Try from memory. Reveal the answer. Then repeat after your teacher.",
+        prompt: "Say “hello”.",
+        hint: "Imagine meeting someone for the first time.",
+        wordId: "hello",
+        followup: "Say it again with your chosen polite ending.",
+        notes: [
+          "Give the student a few seconds before revealing.",
+          "After the reveal, model once and ask for two repetitions with a polite ending."
+        ]
+      },
+      {
+        id: "drill-thanks",
+        type: "drill",
+        eyebrow: "PRACTICE · 2 OF 3",
+        title: "Repeat after me",
+        subtitle: "Try from memory. Reveal the answer. Then repeat after your teacher.",
+        prompt: "Say “thank you”.",
+        hint: "Someone has just brought you a drink.",
+        wordId: "thank-you",
+        followup: "Try a slow version, then a friendly conversational version.",
+        notes: [
+          "Use a small giving gesture to make the situation feel real.",
+          "Praise one specific success, such as a clear ending or confident rhythm."
+        ]
+      },
+      {
+        id: "drill-sorry",
+        type: "drill",
+        eyebrow: "PRACTICE · 3 OF 3",
+        title: "Repeat after me",
+        subtitle: "Try from memory. Reveal the answer. Then repeat after your teacher.",
+        prompt: "Say “sorry / excuse me”.",
+        hint: "You accidentally bump into someone.",
+        wordId: "sorry",
+        followup: "After the apology, what friendly reply might you hear?",
+        notes: [
+          "Reveal only after the student has had a chance to try.",
+          "Elicit the no-problem response orally to prepare for the second role-play."
+        ]
+      },
+      {
+        id: "roleplay-shop",
+        type: "roleplay",
+        eyebrow: "ROLE-PLAY · 1 OF 2",
+        title: "A friendly greeting in a shop",
+        subtitle: "Your teacher is the shopkeeper. You are the customer.",
+        hint: "Choose one ending at each slash. Listen buttons model female endings.",
+        lines: [
+          {
+            speaker: "Teacher", role: "teacher",
+            thai: "สวัสดีครับ/ค่ะ สบายดีไหมครับ/คะ",
+            roman: "sa-wat-dii khráp/khâ · sa-baai dii mái khráp/khá",
+            meaning: "Hello. How are you?",
+            spoken: "สวัสดีค่ะ สบายดีไหมคะ"
+          },
+          {
+            speaker: "Student", role: "student",
+            thai: "สวัสดีครับ/ค่ะ สบายดี แล้วคุณล่ะ",
+            roman: "sa-wat-dii khráp/khâ · sa-baai dii · láew khun lâ",
+            meaning: "Hello. I’m fine. And you?",
+            spoken: "สวัสดีค่ะ สบายดี แล้วคุณล่ะ"
+          },
+          {
+            speaker: "Teacher", role: "teacher",
+            thai: "สบายดี ขอบคุณครับ/ค่ะ",
+            roman: "sa-baai dii · khòop-khun khráp/khâ",
+            meaning: "I’m fine. Thank you.",
+            spoken: "สบายดี ขอบคุณค่ะ"
+          }
+        ],
+        footer: "Try once with support. Then hide pronunciation and try again.",
+        notes: [
+          "The first teacher line is visible. Use R or “Show next line” to reveal each following turn.",
+          "The student says only one ending at each slash. After a supported run, repeat with less help."
+        ]
+      },
+      {
+        id: "roleplay-apology",
+        type: "roleplay",
+        eyebrow: "ROLE-PLAY · 2 OF 2",
+        title: "Oops—a small accident",
+        subtitle: "Two people gently bump into each other in a busy café.",
+        hint: "Keep your voice friendly. Add your chosen polite ending when you are ready.",
+        lines: [
+          {
+            speaker: "Teacher", role: "teacher",
+            thai: "ขอโทษ",
+            roman: "khǎaw-thôot",
+            meaning: "sorry / excuse me"
+          },
+          {
+            speaker: "Student", role: "student",
+            thai: "ไม่เป็นไร",
+            roman: "mâi bpen rai",
+            meaning: "it's okay / no problem"
+          }
+        ],
+        footer: "Now swap roles: you apologise, and your teacher replies.",
+        notes: [
+          "Act out a very small imaginary bump, then apologise.",
+          "Swap roles after the first exchange. Invite natural eye contact and a relaxed tone."
+        ]
+      },
+      {
+        id: "recap",
+        type: "recap",
+        eyebrow: "YOUR FIRST THAI TOOLKIT",
+        title: "Look how much you can say",
+        hint: "Press T to test without pronunciation.",
+        wordIds: [
+          "hello", "male-particle", "female-statement", "female-question",
+          "thank-you", "sorry", "no-problem", "how-are-you",
+          "fine", "and-you", "yes-no", "goodbye"
+        ],
+        notes: [
+          "Choose three words at random and ask the student to use or explain them.",
+          "Finish with a short greeting exchange without reading if the student feels ready."
+        ]
+      },
+      {
+        id: "homework",
+        type: "homework",
+        eyebrow: "A LITTLE PRACTICE GOES A LONG WAY",
+        title: "Your next small step",
+        tasks: [
+          {
+            number: "01",
+            title: "Say the greetings aloud 10 times.",
+            text: "Start slowly. Add your polite ending. Then try a natural speaking pace."
+          },
+          {
+            number: "02",
+            title: "Record a short greeting and listen back to check pronunciation.",
+            text: "Listen for the sounds, the tone movement, and your polite ending."
+          }
+        ],
+        modelLabel: "Start with this",
+        wordId: "hello",
+        footer: "Bring your recording—or one question—to the next lesson.",
+        notes: [
+          "Ask when the student can fit this short practice into their day.",
+          "Suggest recording on their own device. Sharing the recording is optional."
+        ]
+      },
+      {
+        id: "closing",
+        type: "closing",
+        eyebrow: "YOU’VE STARTED SPEAKING THAI",
+        title: "See you next lesson!",
+        subtitle: "One small conversation at a time.",
+        wordId: "hello",
+        footer: "Use your first phrase with someone today.",
+        actions: [
+          { label: "Review the word list", target: "recap" },
+          { label: "Back to the start", target: "welcome" }
+        ],
+        notes: [
+          "Name one specific thing the student did well.",
+          "End with a friendly spoken goodbye and confirm the homework."
+        ]
+      }
+    ];
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Montserrat:wght@500;600;700;800&amp;family=Noto+Sans+Thai:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #0B2A5B;
+      --teal: #14A3A0;
+      --paper: #F7F5F2;
+      --ink: #2B2F36;
+      --coral: #F47C6B;
+      --muted: #647080;
+      --line: rgba(11, 42, 91, .11);
+      --shadow: 0 12px 36px rgba(11, 42, 91, .055);
+      --radius: 26px;
+      --deck-scale: 1;
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #e6eae9;
+    }
+
+    body {
+      font-family: "Inter", "Noto Sans Thai", sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button { font: inherit; }
+    button, [tabindex] { -webkit-tap-highlight-color: transparent; }
+
+    button {
+      cursor: pointer;
+      border: 0;
+    }
+
+    button:focus-visible, [tabindex]:focus-visible {
+      outline: 4px solid var(--teal);
+      outline-offset: 5px;
+    }
+
+    button:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    #viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+
+    /* Fixed 16:9 canvas, fitted to the viewport without cropping. */
+    #stage {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale));
+      transform-origin: center;
+      background: var(--paper);
+      box-shadow: 0 0 90px rgba(11, 42, 91, .10);
+      isolation: isolate;
+    }
+
+    #stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 96% 94%, rgba(244, 124, 107, .10), transparent 35%),
+        radial-gradient(ellipse at 5% 0%, rgba(20, 163, 160, .065), transparent 37%);
+    }
+
+    .progress-track {
+      position: absolute;
+      inset: 0 0 auto;
+      height: 6px;
+      background: rgba(11, 42, 91, .055);
+      z-index: 20;
+    }
+
+    #progress-fill {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--teal), var(--coral));
+      transition: width .28s ease;
+    }
+
+    .topbar {
+      position: absolute;
+      top: 26px;
+      left: 64px;
+      right: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .wordmark {
+      color: var(--navy);
+      font-family: "Montserrat", sans-serif;
+      font-weight: 800;
+      font-size: 30px;
+      letter-spacing: -1.1px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .wordmark::after {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--coral);
+      margin-top: 13px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: auto;
+    }
+
+    .tool-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 43px;
+      padding: 8px 15px;
+      border-radius: 13px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .75);
+      color: var(--navy);
+      font-size: 17px;
+      font-weight: 600;
+      transition: background .18s, border-color .18s;
+    }
+
+    .tool-button[aria-pressed="true"],
+    .tool-button[aria-expanded="true"] {
+      background: #e3f3f0;
+      border-color: rgba(20, 163, 160, .3);
+    }
+
+    kbd {
+      font: 600 14px "Inter", sans-serif;
+      border: 1px solid rgba(11, 42, 91, .14);
+      border-radius: 5px;
+      padding: 2px 5px;
+      color: inherit;
+      background: rgba(255, 255, 255, .55);
+    }
+
+    #slides { position: absolute; inset: 0; }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 108px 64px 108px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(7px);
+      transition:
+        opacity .25s ease,
+        transform .25s ease,
+        visibility 0s linear .25s;
+    }
+
+    .slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+      transition-delay: 0s;
+    }
+
+    .slide-header { flex-shrink: 0; }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--teal);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.4;
+    }
+
+    h1, h2, h3 {
+      color: var(--navy);
+      font-family: "Montserrat", sans-serif;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.16;
+      letter-spacing: -1.5px;
+    }
+
+    h2, h3 { margin: 0; }
+    p { margin: 0; }
+
+    .subtitle {
+      margin-top: 12px;
+      font-size: 26px;
+      line-height: 1.45;
+      color: var(--muted);
+      max-width: 1300px;
+    }
+
+    .slide-body {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, .87);
+      border: 1px solid rgba(11, 42, 91, .07);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .footnote {
+      font-size: 23px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+
+    .thai {
+      font-family: "Noto Sans Thai", sans-serif;
+      font-size: 104px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--navy);
+      letter-spacing: 0;
+    }
+
+    .thai-line {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+    }
+
+    .phrase { text-align: center; }
+
+    .roman {
+      color: var(--teal);
+      font-family: "Inter", sans-serif;
+      font-size: 33px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-top: 1px;
+    }
+
+    /* Visibility preserves spacing when pronunciation is hidden. */
+    .romanization-off .roman { visibility: hidden; }
+
+    .meaning {
+      margin-top: 8px;
+      font-size: 31px;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+
+    .listen {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-shrink: 0;
+      min-height: 42px;
+      padding: 8px 12px;
+      border-radius: 13px;
+      background: #fff0eb;
+      color: var(--navy);
+      border: 1px solid rgba(244, 124, 107, .28);
+      font: 600 17px "Inter", sans-serif;
+      transition: background .18s, transform .18s;
+    }
+
+    .listen svg { width: 19px; height: 19px; }
+
+    .listen:hover, .listen.is-speaking { background: #ffd8ce; }
+    .listen:active { transform: scale(.97); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      border-radius: 15px;
+      padding: 12px 23px;
+      color: var(--navy);
+      background: var(--coral);
+      font-weight: 700;
+      font-size: 21px;
+      line-height: 1.3;
+      transition: transform .18s, box-shadow .18s;
+    }
+
+    .button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(11, 42, 91, .08);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid var(--line);
+    }
+
+    .button.navy { background: var(--navy); color: #fff; }
+
+    /* Title and closing slides. */
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.13fr .87fr;
+      align-items: center;
+      gap: 60px;
+      height: 100%;
+    }
+
+    .hero-copy h1 {
+      font-size: 72px;
+      line-height: 1.13;
+      letter-spacing: -2.4px;
+      max-width: 820px;
+    }
+
+    .hero-copy .subtitle {
+      font-size: 29px;
+      margin-top: 26px;
+      max-width: 660px;
+    }
+
+    .hero-phrase {
+      position: relative;
+      padding: 62px 24px;
+      background: linear-gradient(135deg, #e4f4f0, #fff7f1 64%, #ffe4da);
+    }
+
+    .hero-phrase::before,
+    .hero-phrase::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(20, 163, 160, .16);
+      pointer-events: none;
+    }
+
+    .hero-phrase::before { width: 75px; height: 75px; top: -25px; right: 40px; }
+    .hero-phrase::after { width: 33px; height: 33px; bottom: -15px; left: 40px; }
+    .hero-phrase .thai { font-size: 99px; }
+    .hero-phrase .roman { font-size: 30px; }
+    .hero-phrase .meaning { font-size: 28px; }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 33px;
+    }
+
+    .chip {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .closing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .hero-copy .footnote { margin-top: 28px; }
+
+    /* Goal and warm-up. */
+    .goal-layout { display: flex; flex-direction: column; gap: 22px; }
+
+    .goal-statement {
+      padding: 34px 42px;
+      background: linear-gradient(110deg, #e8f5f1, #fff6ef);
+      font: 600 43px/1.3 "Montserrat", sans-serif;
+      color: var(--navy);
+      letter-spacing: -1px;
+    }
+
+    .three-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .outcome { padding: 27px 30px; }
+    .outcome h2 { font-size: 28px; margin: 12px 0 10px; }
+    .outcome p { font-size: 24px; line-height: 1.45; }
+
+    .step-number {
+      color: var(--teal);
+      font: 700 20px "Montserrat", sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .warmup-layout {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .choice {
+      text-align: left;
+      padding: 42px 32px;
+      min-height: 255px;
+      color: var(--ink);
+      transition: transform .18s, border-color .18s, background .18s;
+    }
+
+    .choice:hover { transform: translateY(-5px); }
+    .choice[aria-pressed="true"] { background: #e5f4f0; border-color: var(--teal); }
+    .choice h2 { font-size: 29px; line-height: 1.25; margin-bottom: 20px; }
+    .choice p { font-size: 25px; line-height: 1.5; }
+
+    .choice-marker {
+      width: 35px;
+      height: 7px;
+      display: block;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--teal), var(--coral));
+      margin-bottom: 26px;
+    }
+
+    /* Vocabulary. */
+    .word-layout { display: flex; flex-direction: column; gap: 18px; }
+
+    .word-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10px 30px 24px;
+      min-height: 0;
+    }
+
+    .word-main .meaning { max-width: 1150px; margin: 6px auto 0; }
+    .word-main .cue {
+      font-size: 23px;
+      line-height: 1.4;
+      color: var(--muted);
+      text-align: center;
+      margin: 17px auto 0;
+      max-width: 1200px;
+    }
+
+    .usage {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      align-items: center;
+      gap: 32px;
+      padding: 20px 30px;
+      background: #edf5f2;
+      border-radius: 21px;
+    }
+
+    .usage-label {
+      color: var(--teal);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      margin-bottom: 8px;
+    }
+
+    .usage-context { font-size: 23px; line-height: 1.4; }
+    .usage .phrase { text-align: left; }
+    .usage .thai-line { justify-content: flex-start; }
+    .usage .thai { font-size: 37px; }
+    .usage .roman { font-size: 23px; }
+    .usage .meaning { font-size: 21px; margin-top: 3px; }
+
+    /* Summary tables. */
+    .summary-layout { display: flex; flex-direction: column; gap: 22px; }
+    .table-card { padding: 15px 30px; overflow: hidden; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      text-align: left;
+    }
+
+    th {
+      padding: 17px 14px;
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    td {
+      padding: 18px 14px;
+      font-size: 26px;
+      line-height: 1.4;
+      vertical-align: middle;
+      border-bottom: 1px solid var(--line);
+    }
+
+    tr:last-child td { border-bottom: 0; }
+    .summary-table .thai-line { justify-content: flex-start; gap: 12px; }
+    .summary-table .thai { font-size: 46px; }
+    .summary-table td.roman { font-size: 27px; }
+    .summary-table th.roman { font-size: 17px; color: var(--muted); }
+
+    /* The wai: CSS person + requested emoji, no image files. */
+    .wai-layout {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .wai-visual {
+      position: relative;
+      height: 430px;
+      border-radius: 36px;
+      background: linear-gradient(145deg, #e1f3ef, #fff4ec 70%, #ffded3);
+      overflow: hidden;
+    }
+
+    .wai-halo {
+      position: absolute;
+      width: 335px;
+      height: 335px;
+      border-radius: 50%;
+      border: 2px solid rgba(20, 163, 160, .16);
+      left: 50%;
+      top: 35px;
+      transform: translateX(-50%);
+    }
+
+    .wai-head {
+      position: absolute;
+      width: 128px;
+      height: 151px;
+      border-radius: 48% 48% 45% 45%;
+      background: #f2d4bd;
+      top: 61px;
+      left: calc(50% - 64px);
+      box-shadow: inset 0 9px 0 rgba(11, 42, 91, .10);
+    }
+
+    .wai-eyes {
+      position: absolute;
+      left: 31px;
+      top: 62px;
+      width: 18px;
+      height: 8px;
+      border-bottom: 3px solid var(--navy);
+      border-radius: 50%;
+      box-shadow: none;
+    }
+
+    .wai-eyes::after {
+      content: "";
+      position: absolute;
+      left: 46px;
+      top: 0;
+      width: 18px;
+      height: 8px;
+      border-bottom: 3px solid var(--navy);
+      border-radius: 50%;
+    }
+
+    .wai-nose {
+      position: absolute;
+      top: 78px;
+      left: 61px;
+      height: 16px;
+      width: 5px;
+      border-radius: 4px;
+      background: rgba(11, 42, 91, .18);
+    }
+
+    .wai-body {
+      position: absolute;
+      top: 208px;
+      left: calc(50% - 133px);
+      width: 266px;
+      height: 255px;
+      border-radius: 105px 105px 0 0;
+      background: var(--navy);
+    }
+
+    .wai-hands {
+      position: absolute;
+      left: 50%;
+      top: 121px;
+      transform: translateX(-50%);
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      font-size: 158px;
+      line-height: 1.35;
+      filter: drop-shadow(0 6px 6px rgba(11, 42, 91, .08));
+    }
+
+    .wai-steps { list-style: none; padding: 0; margin: 0 0 20px; }
+    .wai-steps li {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 28px;
+      line-height: 1.4;
+      padding: 12px 0;
+    }
+
+    .number-dot {
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      border-radius: 50%;
+      background: #e3f2ee;
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .wai-copy .phrase {
+      text-align: left;
+      margin-top: 17px;
+      border-top: 1px solid var(--line);
+      padding-top: 13px;
+    }
+
+    .wai-copy .thai-line { justify-content: flex-start; }
+    .wai-copy .thai { font-size: 50px; }
+    .wai-copy .roman { font-size: 26px; }
+    .wai-copy .meaning { font-size: 24px; }
+
+    /* Polite particles. */
+    .particles-layout { display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+    .particle-card { padding: 30px 23px 36px; }
+    .particle-label {
+      text-align: center;
+      font-size: 23px;
+      font-weight: 600;
+      color: var(--navy);
+      min-height: 60px;
+      line-height: 1.35;
+    }
+
+    .particle-card .thai { font-size: 86px; }
+    .particle-card .roman { font-size: 32px; }
+    .particle-card .meaning { font-size: 25px; line-height: 1.4; min-height: 105px; }
+    .particles-layout .footnote { text-align: center; }
+
+    /* Tone graphics. */
+    .tone-layout { display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+    .tone-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 17px; }
+    .tone-card { padding: 30px 20px; text-align: center; }
+    .tone-card h2 { font-size: 30px; }
+    .tone-card p { font-size: 23px; line-height: 1.4; margin-top: 20px; }
+    .tone-curve { display: block; width: 100%; height: 112px; }
+    .tone-card .tone-curve { margin-top: 22px; }
+    .tone-baseline { stroke: rgba(11, 42, 91, .1); stroke-width: 1; stroke-dasharray: 3 5; }
+
+    .tone-example-layout { display: flex; flex-direction: column; gap: 18px; }
+    .tone-example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; }
+    .tone-example {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 130px 18px 24px;
+    }
+
+    .tone-example .thai { font-size: 68px; }
+    .tone-example .roman { font-size: 28px; }
+    .tone-example .meaning { font-size: 24px; margin-top: 3px; }
+    .tone-example .tone-curve { position: absolute; right: 23px; top: 50%; width: 100px; height: 80px; transform: translateY(-50%); }
+
+    /* Practice: the answer stays completely hidden until revealed. */
+    .drill-layout {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 25px;
+      align-items: stretch;
+    }
+
+    .prompt-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 38px;
+    }
+
+    .prompt-label {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--teal);
+      margin-bottom: 19px;
+    }
+
+    .prompt-card h2 { font-size: 39px; line-height: 1.3; letter-spacing: -.8px; }
+    .prompt-card p { font-size: 25px; line-height: 1.5; margin-top: 18px; }
+    .prompt-card .button { margin-top: 30px; }
+
+    .answer-card {
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(130deg, #e7f5f1, #fff6ef);
+    }
+
+    .answer-cover .cover-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .7);
+      font: 500 54px "Montserrat", sans-serif;
+      color: var(--teal);
+      margin-bottom: 24px;
+    }
+
+    .answer-cover h2 { font-size: 32px; }
+    .answer-cover p { margin-top: 14px; color: var(--muted); font-size: 24px; line-height: 1.5; }
+    .answer-card .thai { font-size: 83px; }
+    .answer-card .roman { font-size: 30px; }
+    .answer-card .meaning { font-size: 28px; }
+    .answer-followup { margin-top: 30px; font-size: 23px; line-height: 1.45; color: var(--muted); }
+    .practice-answer { animation: answer-in .25s ease; }
+
+    @keyframes answer-in {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Line-by-line role-play. */
+    .slide--roleplay { gap: 17px; }
+    .slide--roleplay .subtitle { margin-top: 8px; font-size: 25px; }
+
+    .roleplay-layout { display: flex; flex-direction: column; gap: 12px; }
+    .role-hint { font-size: 21px; color: var(--muted); line-height: 1.35; }
+
+    .dialogue-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+      justify-content: flex-start;
+    }
+
+    .dialogue-row {
+      display: grid;
+      grid-template-columns: 124px 1fr;
+      align-items: center;
+      gap: 18px;
+      padding: 12px 23px;
+      border-radius: 20px;
+      border-left: 5px solid var(--navy);
+      background: #fff;
+      min-height: 144px;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    .dialogue-row.is-waiting {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(5px);
+    }
+
+    .dialogue-row.role-student {
+      border-left-color: var(--teal);
+      background: #eaf5f1;
+    }
+
+    .speaker-label { color: var(--navy); font-size: 22px; font-weight: 700; }
+    .role-student .speaker-label, .role-student .thai { color: var(--teal); }
+    .dialogue-row .phrase { text-align: left; }
+    .dialogue-row .thai-line { justify-content: flex-start; gap: 12px; }
+    .dialogue-row .thai { font-size: 39px; line-height: 1.45; }
+    .dialogue-row .roman { font-size: 22px; line-height: 1.3; }
+    .dialogue-row .meaning { font-size: 22px; line-height: 1.3; margin-top: 4px; }
+
+    .role-controls {
+      display: flex;
+      align-items: center;
+      gap: 19px;
+      flex-shrink: 0;
+    }
+
+    .line-count { font-size: 19px; color: var(--muted); white-space: nowrap; }
+    .role-controls .footnote { margin-left: auto; font-size: 20px; max-width: 650px; }
+
+    /* Compact, readable, two-column recap. */
+    .slide--recap { gap: 19px; }
+    .recap-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 25px; }
+    .recap-header h1 { font-size: 44px; }
+    .recap-header .footnote { max-width: 340px; font-size: 21px; text-align: right; }
+    .recap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .recap-card { padding: 8px 19px; }
+    .recap-table th { font-size: 16px; padding: 12px 8px; }
+    .recap-table td { padding: 7px 8px; font-size: 22px; line-height: 1.3; }
+    .recap-table .phrase { text-align: left; }
+    .recap-table .thai-line { justify-content: flex-start; gap: 7px; flex-wrap: nowrap; }
+    .recap-table .thai { font-size: 34px; line-height: 1.4; white-space: nowrap; }
+    .recap-table .roman { font-size: 20px; line-height: 1.3; margin-top: 0; }
+    .recap-table .listen { min-height: 33px; padding: 6px 7px; font-size: 15px; gap: 4px; border-radius: 10px; }
+    .recap-table .listen svg { width: 15px; height: 15px; }
+
+    /* Homework. */
+    .homework-layout { display: flex; flex-direction: column; gap: 23px; justify-content: center; }
+    .homework-tasks { display: grid; grid-template-columns: 1fr 1fr; gap: 23px; }
+    .homework-task { padding: 29px 32px; }
+    .homework-task h2 { font-size: 30px; line-height: 1.35; margin: 12px 0 17px; }
+    .homework-task p { font-size: 24px; line-height: 1.5; }
+    .homework-model {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 18px 32px;
+      border-radius: 22px;
+      background: #e9f3ef;
+    }
+
+    .homework-model > p { font-size: 25px; font-weight: 600; color: var(--navy); }
+    .homework-model .thai { font-size: 45px; }
+    .homework-model .roman { font-size: 24px; }
+    .homework-model .meaning { font-size: 22px; margin-top: 3px; }
+
+    /* Persistent navigation and teacher notes. */
+    .deck-footer {
+      position: absolute;
+      left: 64px;
+      right: 64px;
+      bottom: 25px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 25px;
+      z-index: 10;
+    }
+
+    .keyboard-help { font-size: 17px; color: var(--muted); line-height: 1.45; }
+    #voice-status { display: block; margin-top: 3px; font-size: 15px; }
+    #counter { color: var(--navy); font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .navigation { display: flex; justify-content: flex-end; align-items: center; gap: 11px; }
+    .navigation .button { min-height: 51px; min-width: 124px; font-size: 20px; }
+    .navigation .arrow { font-size: 25px; line-height: 1; }
+
+    .notes-panel {
+      position: absolute;
+      right: 64px;
+      bottom: 99px;
+      width: 510px;
+      max-height: 570px;
+      overflow-y: auto;
+      z-index: 30;
+      border-radius: 24px;
+      padding: 27px 29px;
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 20px 65px rgba(11, 42, 91, .28);
+    }
+
+    .notes-heading { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+    .notes-heading h2 { color: #fff; font-size: 26px; }
+    .notes-close { width: 37px; height: 37px; border-radius: 10px; background: rgba(255, 255, 255, .12); color: #fff; font-size: 26px; }
+    .notes-warning { color: #ffd4c8; font-size: 16px; margin-top: 10px; }
+    #notes-slide-title { font-size: 20px; font-weight: 600; line-height: 1.45; margin: 23px 0 13px; }
+    #notes-content { margin: 0; padding-left: 23px; }
+    #notes-content li { font-size: 23px; line-height: 1.5; padding: 0 0 14px 4px; }
+    #notes-content li:last-child { padding-bottom: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="viewport" aria-label="Speako Thai lesson slide deck">
+    <div id="stage">
+      <div
+        id="progress"
+        class="progress-track"
+        role="progressbar"
+        aria-label="Lesson progress"
+        aria-valuemin="1"
+        aria-valuenow="1"
+      >
+        <span id="progress-fill"></span>
+      </div>
+
+      <header class="topbar">
+        <div class="wordmark" aria-label="Speako">Speako</div>
+        <div class="toolbar" aria-label="Presentation controls">
+          <button
+            id="roman-toggle"
+            class="tool-button"
+            data-action="roman"
+            aria-pressed="true"
+            title="Show or hide romanization (T)"
+          >Pronunciation <kbd>T</kbd></button>
+          <button
+            id="notes-toggle"
+            class="tool-button"
+            data-action="notes"
+            aria-expanded="false"
+            aria-controls="teacher-notes"
+            title="Show or hide teacher notes (N)"
+          >Notes <kbd>N</kbd></button>
+          <button
+            id="fullscreen-toggle"
+            class="tool-button"
+            data-action="fullscreen"
+            aria-pressed="false"
+            title="Toggle fullscreen (F)"
+          >Full screen <kbd>F</kbd></button>
+        </div>
+      </header>
+
+      <div id="slides" aria-label="Lesson slides"></div>
+
+      <aside id="teacher-notes" class="notes-panel" aria-labelledby="notes-heading" hidden>
+        <div class="notes-heading">
+          <h2 id="notes-heading">Teacher notes</h2>
+          <button class="notes-close" data-action="close-notes" aria-label="Close teacher notes">×</button>
+        </div>
+        <p class="notes-warning">Visible to the student while screen sharing.</p>
+        <p id="notes-slide-title"></p>
+        <ul id="notes-content"></ul>
+      </aside>
+
+      <footer class="deck-footer">
+        <div class="keyboard-help">
+          ← → / Space: slides &nbsp; · &nbsp; R: reveal
+          <span id="voice-status">Checking for a Thai voice…</span>
+        </div>
+        <div id="counter" aria-label="Slide counter">1 / 30</div>
+        <nav class="navigation" aria-label="Slide navigation">
+          <button id="prev-button" class="button secondary" data-action="prev" aria-label="Previous slide">
+            <span class="arrow" aria-hidden="true">←</span> Previous
+          </button>
+          <button id="next-button" class="button navy" data-action="next" aria-label="Next slide">
+            Next <span class="arrow" aria-hidden="true">→</span>
+          </button>
+        </nav>
+      </footer>
+
+      <div id="announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    </div>
+  </main>
+
+  <noscript>This lesson needs JavaScript enabled to display the slides and controls.</noscript>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const WIDTH = 1600;
+      const HEIGHT = 900;
+
+      const stage = document.getElementById("stage");
+      const slidesHost = document.getElementById("slides");
+      const progress = document.getElementById("progress");
+      const progressFill = document.getElementById("progress-fill");
+      const counter = document.getElementById("counter");
+      const prevButton = document.getElementById("prev-button");
+      const nextButton = document.getElementById("next-button");
+      const romanToggle = document.getElementById("roman-toggle");
+      const notesToggle = document.getElementById("notes-toggle");
+      const fullscreenToggle = document.getElementById("fullscreen-toggle");
+      const notesPanel = document.getElementById("teacher-notes");
+      const announcer = document.getElementById("announcer");
+      const voiceStatus = document.getElementById("voice-status");
+
+      const words = new Map(SLIDES.filter(s => s.type === "word").map(s => [s.id, s]));
+      const toneSlide = SLIDES.find(s => s.type === "tones");
+      const tones = new Map(toneSlide.tones.map(t => [t.id, t]));
+      const states = SLIDES.map(() => ({ revealed: false, shownLines: 1, choice: null }));
+
+      let currentIndex = -1;
+      let romanVisible = true;
+      let notesVisible = false;
+      let thaiVoice = null;
+      let activeUtterance = null;
+      let activeListenButton = null;
+
+      const synth = (
+        "speechSynthesis" in window &&
+        "SpeechSynthesisUtterance" in window
+      ) ? window.speechSynthesis : null;
+
+      // Escape editable text before inserting it into HTML.
+      const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[char]));
+
+      function getWord(id) {
+        const word = words.get(id);
+        if (!word) throw new Error(`Unknown vocabulary ID: ${id}`);
+        return word;
+      }
+
+      function listenButton(text, spokenText = text) {
+        return `
+          <button
+            class="listen"
+            data-action="listen"
+            data-speak="${escapeHTML(spokenText)}"
+            aria-label="${escapeHTML(`Listen to Thai: ${text}`)}"
+            aria-pressed="false"
+            title="Listen in Thai"
+            hidden
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true">
+              <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+              <path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"></path>
+            </svg>
+            <span>Listen</span>
+          </button>`;
+      }
+
+      // Every visible Thai phrase is rendered here, with a nearby Listen button.
+      function thaiLine(item) {
+        return `
+          <div class="thai-line">
+            <span class="thai" lang="th">${escapeHTML(item.thai)}</span>
+            ${listenButton(item.thai, item.spoken || item.thai)}
+          </div>`;
+      }
+
+      function phrase(item, showMeaning = true) {
+        return `
+          <div class="phrase">
+            ${thaiLine(item)}
+            <div class="roman" lang="en">${escapeHTML(item.roman)}</div>
+            ${showMeaning ? `<div class="meaning">${escapeHTML(item.meaning)}</div>` : ""}
+          </div>`;
+      }
+
+      function slideHeader(slide) {
+        return `
+          <header class="slide-header">
+            <p class="eyebrow">${escapeHTML(slide.eyebrow)}</p>
+            <h1 tabindex="-1">${escapeHTML(slide.title)}</h1>
+            ${slide.subtitle ? `<p class="subtitle">${escapeHTML(slide.subtitle)}</p>` : ""}
+          </header>`;
+      }
+
+      function curve(tone) {
+        return `
+          <svg class="tone-curve" viewBox="0 0 120 80" aria-hidden="true">
+            <path class="tone-baseline" d="M6 20H114M6 40H114M6 60H114"></path>
+            <path d="${escapeHTML(tone.path)}"
+                  fill="none" stroke="${escapeHTML(tone.color)}"
+                  stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="108"
+                    cy="${tone.id === "mid" ? 38 : tone.id === "low" ? 56 : tone.id === "falling" ? 60 : tone.id === "high" ? 15 : 14}"
+                    r="4" fill="${escapeHTML(tone.color)}"></circle>
+          </svg>`;
+      }
+
+      function summaryTable(ids) {
+        return `
+          <div class="table-card card">
+            <table class="summary-table">
+              <colgroup><col style="width:34%"><col style="width:25%"><col style="width:41%"></colgroup>
+              <thead><tr>
+                <th scope="col">Thai</th>
+                <th scope="col" class="roman">Pronunciation</th>
+                <th scope="col">Meaning</th>
+              </tr></thead>
+              <tbody>${ids.map(id => {
+                const word = getWord(id);
+                return `<tr>
+                  <td>${thaiLine(word)}</td>
+                  <td class="roman" lang="en">${escapeHTML(word.roman)}</td>
+                  <td>${escapeHTML(word.meaning)}</td>
+                </tr>`;
+              }).join("")}</tbody>
+            </table>
+          </div>`;
+      }
+
+      function recapTable(ids, groupNumber) {
+        return `
+          <div class="recap-card card">
+            <table class="recap-table">
+              <caption class="sr-only">Vocabulary review, group ${groupNumber}</caption>
+              <colgroup><col style="width:54%"><col style="width:46%"></colgroup>
+              <thead><tr>
+                <th scope="col">Thai <span class="roman" style="font-size:inherit;color:inherit">+ pronunciation</span></th>
+                <th scope="col">Meaning</th>
+              </tr></thead>
+              <tbody>${ids.map(id => {
+                const word = getWord(id);
+                return `<tr>
+                  <td>${phrase(word, false)}</td>
+                  <td>${escapeHTML(word.meaning)}</td>
+                </tr>`;
+              }).join("")}</tbody>
+            </table>
+          </div>`;
+      }
+
+      function renderSlide(slide, index) {
+        const header = slideHeader(slide);
+
+        switch (slide.type) {
+          case "title":
+          case "closing":
+            return `
+              <div class="slide-body hero-layout">
+                <div class="hero-copy">
+                  <p class="eyebrow">${escapeHTML(slide.eyebrow)}</p>
+                  <h1 tabindex="-1">${escapeHTML(slide.title)}</h1>
+                  <p class="subtitle">${escapeHTML(slide.subtitle)}</p>
+                  ${slide.chips ? `
+                    <div class="chip-list">${slide.chips.map(chip =>
+                      `<span class="chip">${escapeHTML(chip)}</span>`
+                    ).join("")}</div>` : ""}
+                  ${slide.actions ? `
+                    <div class="closing-actions">${slide.actions.map((action, i) =>
+                      `<button class="button ${i ? "secondary" : ""}" data-action="goto"
+                        data-target="${escapeHTML(action.target)}">${escapeHTML(action.label)}</button>`
+                    ).join("")}</div>` : ""}
+                  ${slide.footer ? `<p class="footnote">${escapeHTML(slide.footer)}</p>` : ""}
+                </div>
+                <div class="hero-phrase card">${phrase(getWord(slide.wordId))}</div>
+              </div>`;
+
+          case "goal":
+            return `${header}
+              <div class="slide-body goal-layout">
+                <div class="goal-statement card">${escapeHTML(slide.statement)}</div>
+                <div class="three-grid">
+                  ${slide.outcomes.map((item, i) => `
+                    <div class="outcome card">
+                      <span class="step-number">0${i + 1}</span>
+                      <h2>${escapeHTML(item.title)}</h2>
+                      <p>${escapeHTML(item.text)}</p>
+                    </div>`).join("")}
+                </div>
+              </div>`;
+
+          case "warmup":
+            return `${header}
+              <div class="slide-body warmup-layout">
+                <div class="three-grid">
+                  ${slide.options.map((option, i) => `
+                    <button class="choice card" data-action="choose" data-option="${i}" aria-pressed="false">
+                      <span class="choice-marker" aria-hidden="true"></span>
+                      <h2>${escapeHTML(option.title)}</h2>
+                      <p>${escapeHTML(option.text)}</p>
+                    </button>`).join("")}
+                </div>
+                <p class="footnote">${escapeHTML(slide.footer)}</p>
+              </div>`;
+
+          case "word":
+            return `${header}
+              <div class="slide-body word-layout">
+                <div class="word-main card">
+                  ${phrase(slide)}
+                  <p class="cue">${escapeHTML(slide.cue)}</p>
+                </div>
+                <div class="usage">
+                  <div>
+                    <p class="usage-label">IN CONTEXT</p>
+                    <p class="usage-context">${escapeHTML(slide.example.context)}</p>
+                  </div>
+                  ${phrase(slide.example)}
+                </div>
+              </div>`;
+
+          case "summary":
+            return `${header}
+              <div class="slide-body summary-layout">
+                ${summaryTable(slide.wordIds)}
+                <p class="footnote">${escapeHTML(slide.footer)}</p>
+              </div>`;
+
+          case "wai":
+            return `${header}
+              <div class="slide-body wai-layout">
+                <div class="wai-visual" role="img"
+                     aria-label="A simplified person holding palms together with fingertips near the nose.">
+                  <div class="wai-halo" aria-hidden="true"></div>
+                  <div class="wai-body" aria-hidden="true"></div>
+                  <div class="wai-head" aria-hidden="true">
+                    <span class="wai-eyes"></span><span class="wai-nose"></span>
+                  </div>
+                  <div class="wai-hands" aria-hidden="true">${escapeHTML(slide.visual)}</div>
+                </div>
+                <div class="wai-copy">
+                  <ol class="wai-steps">
+                    ${slide.steps.map((step, i) => `
+                      <li><span class="number-dot" aria-hidden="true">${i + 1}</span><span>${escapeHTML(step)}</span></li>`
+                    ).join("")}
+                  </ol>
+                  <p class="footnote">${escapeHTML(slide.footer)}</p>
+                  ${phrase(getWord(slide.wordId))}
+                </div>
+              </div>`;
+
+          case "particles":
+            return `${header}
+              <div class="slide-body particles-layout">
+                <div class="three-grid">
+                  ${slide.cards.map(card => `
+                    <div class="particle-card card">
+                      <p class="particle-label">${escapeHTML(card.label)}</p>
+                      ${phrase(getWord(card.wordId))}
+                    </div>`).join("")}
+                </div>
+                <p class="footnote">${escapeHTML(slide.footer)}</p>
+              </div>`;
+
+          case "tones":
+            return `${header}
+              <div class="slide-body tone-layout">
+                <div class="tone-grid">
+                  ${slide.tones.map(tone => `
+                    <div class="tone-card card">
+                      <h2>${escapeHTML(tone.label)}</h2>
+                      ${curve(tone)}
+                      <p>${escapeHTML(tone.cue)}</p>
+                    </div>`).join("")}
+                </div>
+                <p class="footnote">${escapeHTML(slide.footer)}</p>
+              </div>`;
+
+          case "tone-examples":
+            return `${header}
+              <div class="slide-body tone-example-layout">
+                <div class="tone-example-grid">
+                  ${slide.examples.map(example => `
+                    <div class="tone-example card">
+                      ${phrase(example)}
+                      ${curve(tones.get(example.toneId))}
+                    </div>`).join("")}
+                </div>
+                <p class="footnote">${escapeHTML(slide.footer)}</p>
+              </div>`;
+
+          case "drill":
+            return `${header}
+              <div class="slide-body drill-layout">
+                <div class="prompt-card card">
+                  <div class="prompt-label">ENGLISH PROMPT</div>
+                  <h2>${escapeHTML(slide.prompt)}</h2>
+                  <p>${escapeHTML(slide.hint)}</p>
+                  <button class="button" data-action="reveal"
+                          aria-expanded="false" aria-controls="answer-${index}">
+                    Reveal Thai answer
+                  </button>
+                </div>
+                <div class="answer-card card">
+                  <div class="answer-cover">
+                    <span class="cover-mark" aria-hidden="true">?</span>
+                    <h2>Your turn</h2>
+                    <p>Say it aloud first.<br>Click Reveal or press R when ready.</p>
+                  </div>
+                  <div id="answer-${index}" class="practice-answer" aria-live="polite" aria-atomic="true" hidden>
+                    ${phrase(getWord(slide.wordId))}
+                    <p class="answer-followup">${escapeHTML(slide.followup)}</p>
+                  </div>
+                </div>
+              </div>`;
+
+          case "roleplay":
+            return `${header}
+              <div class="slide-body roleplay-layout">
+                <p class="role-hint">${escapeHTML(slide.hint)}</p>
+                <div class="dialogue-list" aria-label="Conversation">
+                  ${slide.lines.map((line, i) => `
+                    <div class="dialogue-row role-${escapeHTML(line.role)} ${i ? "is-waiting" : ""}"
+                         data-line="${i}" aria-hidden="${i ? "true" : "false"}" ${i ? "inert" : ""}>
+                      <div class="speaker-label">${escapeHTML(line.speaker)}</div>
+                      ${phrase(line)}
+                    </div>`).join("")}
+                </div>
+                <div class="role-controls">
+                  <button class="button" data-action="line">Show next line</button>
+                  <span class="line-count">1 / ${slide.lines.length} lines</span>
+                  <p class="footnote">${escapeHTML(slide.footer)}</p>
+                </div>
+              </div>`;
+
+          case "recap": {
+            const halfway = Math.ceil(slide.wordIds.length / 2);
+            return `
+              <header class="slide-header recap-header">
+                <div>
+                  <p class="eyebrow">${escapeHTML(slide.eyebrow)}</p>
+                  <h1 tabindex="-1">${escapeHTML(slide.title)}</h1>
+                </div>
+                <p class="footnote">${escapeHTML(slide.hint)}</p>
+              </header>
+              <div class="slide-body recap-grid">
+                ${recapTable(slide.wordIds.slice(0, halfway), 1)}
+                ${recapTable(slide.wordIds.slice(halfway), 2)}
+              </div>`;
+          }
+
+          case "homework":
+            return `${header}
+              <div class="slide-body homework-layout">
+                <div class="homework-tasks">
+                  ${slide.tasks.map(task => `
+                    <div class="homework-task card">
+                      <span class="step-number">${escapeHTML(task.number)}</span>
+                      <h2>${escapeHTML(task.title)}</h2>
+                      <p>${escapeHTML(task.text)}</p>
+                    </div>`).join("")}
+                </div>
+                <div class="homework-model">
+                  <p>${escapeHTML(slide.modelLabel)}</p>
+                  ${phrase(getWord(slide.wordId))}
+                </div>
+                <p class="footnote">${escapeHTML(slide.footer)}</p>
+              </div>`;
+
+          default:
+            throw new Error(`Unknown slide type: ${slide.type}`);
+        }
+      }
+
+      // Build once so reveal states and selected warm-up cards survive navigation.
+      const fragment = document.createDocumentFragment();
+
+      SLIDES.forEach((slide, index) => {
+        const article = document.createElement("section");
+        article.className = `slide slide--${slide.type}`;
+        article.dataset.index = String(index);
+        article.id = `slide-${index + 1}`;
+        article.setAttribute("role", "group");
+        article.setAttribute("aria-roledescription", "slide");
+        article.setAttribute("aria-label", `${index + 1} of ${SLIDES.length}: ${slide.title}`);
+        article.setAttribute("aria-hidden", "true");
+        article.inert = true;
+        article.innerHTML = renderSlide(slide, index);
+        fragment.appendChild(article);
+      });
+
+      slidesHost.appendChild(fragment);
+      const slideElements = [...slidesHost.children];
+      progress.setAttribute("aria-valuemax", String(SLIDES.length));
+
+      function announce(message) {
+        announcer.textContent = message;
+      }
+
+      function fitDeck() {
+        const scale = Math.min(window.innerWidth / WIDTH, window.innerHeight / HEIGHT);
+        document.documentElement.style.setProperty("--deck-scale", String(scale));
+      }
+
+      function updateNotes() {
+        const slide = SLIDES[currentIndex];
+        document.getElementById("notes-slide-title").textContent =
+          `${currentIndex + 1} / ${SLIDES.length} · ${slide.title}`;
+
+        document.getElementById("notes-content").innerHTML =
+          slide.notes.map(note => `<li>${escapeHTML(note)}</li>`).join("");
+      }
+
+      function stopSpeech() {
+        activeUtterance = null;
+        if (activeListenButton) {
+          activeListenButton.classList.remove("is-speaking");
+          activeListenButton.setAttribute("aria-pressed", "false");
+          activeListenButton = null;
+        }
+        if (synth) {
+          try { synth.cancel(); } catch (_) { /* Speech is optional. */ }
+        }
+      }
+
+      function goTo(index) {
+        const nextIndex = Math.max(0, Math.min(SLIDES.length - 1, index));
+        if (nextIndex === currentIndex) return;
+
+        const oldSlide = slideElements[currentIndex];
+        const moveFocus = oldSlide && oldSlide.contains(document.activeElement);
+        const newSlide = slideElements[nextIndex];
+
+        stopSpeech();
+
+        // Move keyboard focus before making its previous slide inert.
+        newSlide.inert = false;
+        newSlide.setAttribute("aria-hidden", "false");
+        newSlide.classList.add("is-active");
+
+        if (moveFocus) {
+          newSlide.querySelector("h1").focus({ preventScroll: true });
+        }
+
+        if (oldSlide) {
+          oldSlide.classList.remove("is-active");
+          oldSlide.setAttribute("aria-hidden", "true");
+          oldSlide.inert = true;
+        }
+
+        currentIndex = nextIndex;
+        const number = currentIndex + 1;
+
+        counter.textContent = `${number} / ${SLIDES.length}`;
+        progressFill.style.width = `${number / SLIDES.length * 100}%`;
+        progress.setAttribute("aria-valuenow", String(number));
+        progress.setAttribute("aria-valuetext", `Slide ${number} of ${SLIDES.length}`);
+        prevButton.disabled = currentIndex === 0;
+        nextButton.disabled = currentIndex === SLIDES.length - 1;
+
+        updateNotes();
+        announce(`Slide ${number} of ${SLIDES.length}: ${SLIDES[currentIndex].title}`);
+      }
+
+      function toggleRomanization() {
+        romanVisible = !romanVisible;
+        stage.classList.toggle("romanization-off", !romanVisible);
+        romanToggle.setAttribute("aria-pressed", String(romanVisible));
+        romanToggle.title = `${romanVisible ? "Hide" : "Show"} romanization (T)`;
+
+        stage.querySelectorAll(".roman").forEach(element => {
+          element.setAttribute("aria-hidden", String(!romanVisible));
+        });
+
+        announce(`Pronunciation ${romanVisible ? "shown" : "hidden"}.`);
+      }
+
+      function toggleNotes(force) {
+        notesVisible = typeof force === "boolean" ? force : !notesVisible;
+        const focusWasInside = notesPanel.contains(document.activeElement);
+        notesPanel.hidden = !notesVisible;
+        notesToggle.setAttribute("aria-expanded", String(notesVisible));
+
+        if (notesVisible) {
+          updateNotes();
+          notesPanel.querySelector(".notes-close").focus({ preventScroll: true });
+        } else if (focusWasInside) {
+          notesToggle.focus({ preventScroll: true });
+        }
+      }
+
+      async function toggleFullscreen() {
+        try {
+          if (document.fullscreenElement) {
+            await document.exitFullscreen();
+          } else if (document.documentElement.requestFullscreen) {
+            await document.documentElement.requestFullscreen();
+          } else {
+            announce("Fullscreen is not available in this browser. You can use the browser’s presentation controls.");
+          }
+        } catch (_) {
+          announce("Fullscreen could not be opened. Try your browser’s fullscreen control.");
+        }
+      }
+
+      function toggleDrill(index) {
+        const root = slideElements[index];
+        const state = states[index];
+        state.revealed = !state.revealed;
+
+        root.querySelector(".answer-cover").hidden = state.revealed;
+        root.querySelector(".practice-answer").hidden = !state.revealed;
+
+        const button = root.querySelector('[data-action="reveal"]');
+        button.textContent = state.revealed ? "Hide Thai answer" : "Reveal Thai answer";
+        button.setAttribute("aria-expanded", String(state.revealed));
+
+        if (!state.revealed) stopSpeech();
+        announce(state.revealed ? "Thai answer revealed." : "Thai answer hidden.");
+      }
+
+      function advanceDialogue(index) {
+        const root = slideElements[index];
+        const slide = SLIDES[index];
+        const state = states[index];
+
+        stopSpeech();
+        state.shownLines = state.shownLines < slide.lines.length ? state.shownLines + 1 : 1;
+
+        root.querySelectorAll(".dialogue-row").forEach((row, i) => {
+          const visible = i < state.shownLines;
+          row.classList.toggle("is-waiting", !visible);
+          row.setAttribute("aria-hidden", String(!visible));
+          row.inert = !visible;
+        });
+
+        root.querySelector('[data-action="line"]').textContent =
+          state.shownLines === slide.lines.length ? "Start dialogue again" : "Show next line";
+
+        root.querySelector(".line-count").textContent =
+          `${state.shownLines} / ${slide.lines.length} lines`;
+
+        announce(state.shownLines === 1
+          ? "Dialogue restarted. First line shown."
+          : `Line ${state.shownLines} of ${slide.lines.length} shown.`);
+      }
+
+      function revealCurrent() {
+        const slide = SLIDES[currentIndex];
+        if (slide.type === "drill") toggleDrill(currentIndex);
+        if (slide.type === "roleplay") advanceDialogue(currentIndex);
+      }
+
+      function chooseWarmup(index, optionIndex) {
+        states[index].choice = optionIndex;
+        slideElements[index].querySelectorAll(".choice").forEach((button, i) => {
+          button.setAttribute("aria-pressed", String(i === optionIndex));
+        });
+      }
+
+      /*
+       * Thai speech:
+       * Never fall back to a non-Thai voice.
+       * Voice lists may arrive asynchronously after page load.
+       */
+      function refreshVoices() {
+        let availableVoices = [];
+        if (synth) {
+          try { availableVoices = synth.getVoices(); } catch (_) { /* Optional enhancement. */ }
+        }
+
+        const thaiVoices = availableVoices.filter(voice => /^th(?:[-_]|$)/i.test(voice.lang));
+        thaiVoice =
+          thaiVoices.find(voice => /^th[-_]th$/i.test(voice.lang) && voice.localService) ||
+          thaiVoices.find(voice => /^th[-_]th$/i.test(voice.lang)) ||
+          thaiVoices[0] ||
+          null;
+
+        stage.querySelectorAll(".listen").forEach(button => {
+          button.hidden = !thaiVoice;
+        });
+
+        voiceStatus.textContent = thaiVoice ? "Thai audio ready" : "Teacher-led audio";
+        voiceStatus.title = thaiVoice
+          ? `Thai voice: ${thaiVoice.name}`
+          : "Listen buttons appear only when your browser provides a Thai voice.";
+
+        if (!thaiVoice && activeUtterance) stopSpeech();
+      }
+
+      function speak(button) {
+        if (!synth) return;
+
+        if (activeListenButton === button) {
+          stopSpeech();
+          return;
+        }
+
+        refreshVoices();
+        if (!thaiVoice) return;
+
+        stopSpeech();
+
+        const utterance = new SpeechSynthesisUtterance(button.dataset.speak);
+        utterance.lang = "th-TH";
+        utterance.voice = thaiVoice;
+        utterance.rate = 0.85;
+        utterance.pitch = 1;
+        utterance.volume = 1;
+
+        activeUtterance = utterance;
+        activeListenButton = button;
+        button.classList.add("is-speaking");
+        button.setAttribute("aria-pressed", "true");
+
+        function finish() {
+          if (activeUtterance !== utterance) return;
+          button.classList.remove("is-speaking");
+          button.setAttribute("aria-pressed", "false");
+          activeUtterance = null;
+          activeListenButton = null;
+        }
+
+        utterance.onend = finish;
+        utterance.onerror = event => {
+          finish();
+          if (event.error !== "canceled" && event.error !== "interrupted") {
+            announce("Thai audio could not play. Please follow your teacher’s pronunciation.");
+          }
+        };
+
+        try {
+          synth.speak(utterance);
+        } catch (_) {
+          finish();
+          announce("Thai audio could not play. Please follow your teacher’s pronunciation.");
+        }
+      }
+
+      // One delegated click listener handles controls throughout the deck.
+      stage.addEventListener("click", event => {
+        const button = event.target.closest("button[data-action]");
+        if (!button || button.disabled || button.hidden) return;
+
+        const section = button.closest(".slide");
+        const index = section ? Number(section.dataset.index) : currentIndex;
+
+        switch (button.dataset.action) {
+          case "prev": goTo(currentIndex - 1); break;
+          case "next": goTo(currentIndex + 1); break;
+          case "roman": toggleRomanization(); break;
+          case "notes": toggleNotes(); break;
+          case "close-notes": toggleNotes(false); break;
+          case "fullscreen": toggleFullscreen(); break;
+          case "listen": speak(button); break;
+          case "reveal": toggleDrill(index); break;
+          case "line": advanceDialogue(index); break;
+          case "choose": chooseWarmup(index, Number(button.dataset.option)); break;
+          case "goto": {
+            const destination = SLIDES.findIndex(slide => slide.id === button.dataset.target);
+            if (destination >= 0) goTo(destination);
+            break;
+          }
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.altKey || event.ctrlKey || event.metaKey || event.isComposing) return;
+        if (event.target.closest("input, textarea, select, [contenteditable='true']")) return;
+
+        const key = event.key.toLowerCase();
+
+        // Preserve native Space activation when a button has keyboard focus.
+        if ((event.code === "Space" || key === " ") && event.target.closest("button")) return;
+
+        if (["arrowright", "arrowdown", "pagedown"].includes(key) || event.code === "Space" || key === " ") {
+          event.preventDefault();
+          if (!event.repeat) goTo(currentIndex + 1);
+        } else if (["arrowleft", "arrowup", "pageup"].includes(key)) {
+          event.preventDefault();
+          if (!event.repeat) goTo(currentIndex - 1);
+        } else if (key === "home") {
+          event.preventDefault();
+          goTo(0);
+        } else if (key === "end") {
+          event.preventDefault();
+          goTo(SLIDES.length - 1);
+        } else if (!event.repeat && key === "t") {
+          event.preventDefault();
+          toggleRomanization();
+        } else if (!event.repeat && key === "n") {
+          event.preventDefault();
+          toggleNotes();
+        } else if (!event.repeat && key === "f") {
+          event.preventDefault();
+          toggleFullscreen();
+        } else if (!event.repeat && key === "r") {
+          event.preventDefault();
+          revealCurrent();
+        } else if (key === "escape" && notesVisible) {
+          toggleNotes(false);
+        }
+      });
+
+      // Horizontal touch swipe; controls and the notes panel keep native interaction.
+      let swipeStart = null;
+
+      stage.addEventListener("pointerdown", event => {
+        if (event.pointerType !== "touch" || !event.isPrimary) return;
+        if (event.target.closest("button, #teacher-notes")) return;
+        swipeStart = {
+          id: event.pointerId,
+          x: event.clientX,
+          y: event.clientY,
+          time: performance.now()
+        };
+      }, { passive: true });
+
+      window.addEventListener("pointerup", event => {
+        if (!swipeStart || event.pointerId !== swipeStart.id) return;
+
+        const dx = event.clientX - swipeStart.x;
+        const dy = event.clientY - swipeStart.y;
+        const elapsed = performance.now() - swipeStart.time;
+        swipeStart = null;
+
+        if (elapsed < 1000 && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          goTo(currentIndex + (dx < 0 ? 1 : -1));
+        }
+      }, { passive: true });
+
+      window.addEventListener("pointercancel", () => { swipeStart = null; }, { passive: true });
+      window.addEventListener("resize", fitDeck);
+
+      document.addEventListener("fullscreenchange", () => {
+        fullscreenToggle.setAttribute("aria-pressed", String(Boolean(document.fullscreenElement)));
+        fitDeck();
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) stopSpeech();
+      });
+
+      window.addEventListener("pagehide", stopSpeech);
+
+      if (synth) {
+        if (typeof synth.addEventListener === "function") {
+          synth.addEventListener("voiceschanged", refreshVoices);
+        } else {
+          synth.onvoiceschanged = refreshVoices;
+        }
+      }
+
+      // Startup. Optional #slide-4 links can open a particular slide.
+      const hashMatch = location.hash.match(/^#slide-(\d+)$/);
+      const initialIndex = hashMatch ? Number(hashMatch[1]) - 1 : 0;
+
+      fitDeck();
+      goTo(initialIndex);
+      refreshVoices();
+
+      // Some browsers populate voices without firing voiceschanged immediately.
+      [250, 1000, 3000].forEach(delay => setTimeout(refreshVoices, delay));
+    })();
+  </script>
+</body>
+</html>

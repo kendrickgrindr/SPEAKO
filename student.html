@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speako — Student Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-portal="student">
+
+  <!-- iOS 27 Liquid Glass Student Navigation -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-logo" onclick="switchTab('schedule')">
+          <img src="Speako logo.png" alt="Speako" />
+          <span class="brand-wordmark">Speako</span>
+        </div>
+        <span class="role-portal-badge student">Student</span>
+      </div>
+
+      <nav class="segmented-nav" aria-label="Student Navigation">
+        <button class="seg-btn active" data-tab="schedule" onclick="switchTab('schedule')">Schedule</button>
+        <button class="seg-btn" data-tab="book" onclick="switchTab('book')">Book</button>
+        <button class="seg-btn" data-tab="lessons" onclick="switchTab('lessons')">Lessons</button>
+        <button class="seg-btn" data-tab="credits" onclick="switchTab('credits')">Credits</button>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="account-pill" onclick="switchTab('credits')" title="Credits &amp; Receipts">
+          <div class="avatar-circle" id="nav-avatar">ST</div>
+          <span class="account-pill-text" id="nav-user-name">Student</span>
+          <span class="account-pill-credits" id="nav-user-credits">0</span>
+        </button>
+        <button class="btn btn-ghost btn-sm" onclick="signOut()">Exit</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app-main" class="container"></main>
+
+  <div id="modal-backdrop" class="modal-backdrop" onclick="if(event.target===this) closeModal()">
+    <div id="modal-sheet" class="modal-sheet"></div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+# Speako portal uses Python standard library only

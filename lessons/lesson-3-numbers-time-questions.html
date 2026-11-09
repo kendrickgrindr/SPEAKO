@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speako · Lesson 3: Numbers, Time, and Basic Questions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   BRAND TOKENS
+   ========================================================= */
+:root{
+  --navy:#0B2A5B; --teal:#14A3A0; --bg:#F7F5F2; --text:#2B2F36; --coral:#F47C6B;
+  --grad:linear-gradient(135deg,#14A3A0 0%,#F47C6B 100%);
+  --grad-soft:linear-gradient(135deg,rgba(20,163,160,.10),rgba(244,124,107,.10));
+  --shadow:0 14px 34px rgba(11,42,91,.08),0 2px 6px rgba(11,42,91,.05);
+  --radius:28px;
+  --f-head:'Montserrat','Noto Sans Thai',sans-serif;
+  --f-body:'Inter','Noto Sans Thai',sans-serif;
+  --f-thai:'Noto Sans Thai',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:#E7E3DD;font-family:var(--f-body);color:var(--text);-webkit-font-smoothing:antialiased}
+button{font-family:inherit}
+
+/* =========================================================
+   STAGE: fixed 1600x900 canvas, scaled by JS to fit window
+   ========================================================= */
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;background:var(--bg);
+  transform-origin:center center;overflow:hidden;box-shadow:0 24px 70px rgba(11,42,91,.15)}
+#stage::before,#stage::after{content:"";position:absolute;border-radius:50%;filter:blur(10px);pointer-events:none}
+#stage::before{width:720px;height:720px;right:-260px;top:-300px;background:radial-gradient(circle,rgba(20,163,160,.13),transparent 65%)}
+#stage::after{width:680px;height:680px;left:-280px;bottom:-320px;background:radial-gradient(circle,rgba(244,124,107,.13),transparent 65%)}
+
+/* Progress bar + controls + wordmark */
+#progress{position:absolute;top:0;left:0;right:0;height:8px;background:rgba(11,42,91,.06);z-index:20}
+#progress-fill{height:100%;width:0;background:var(--grad);border-radius:0 8px 8px 0;transition:width .5s ease}
+.wordmark{position:absolute;left:44px;bottom:34px;z-index:20;font:800 28px var(--f-head);letter-spacing:-.02em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.controls{position:absolute;right:40px;bottom:28px;z-index:20;display:flex;align-items:center;gap:16px}
+.nav-btn{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;background:#fff;color:var(--navy);
+  box-shadow:var(--shadow);display:grid;place-items:center;transition:transform .15s,background .2s,color .2s}
+.nav-btn:hover{background:var(--coral);color:#fff;transform:translateY(-2px)}
+.nav-btn:disabled{opacity:.35;pointer-events:none}
+#counter{font:700 22px var(--f-head);color:var(--navy);min-width:92px;text-align:center}
+
+/* =========================================================
+   SLIDES + FADE TRANSITION
+   ========================================================= */
+.slide{position:absolute;inset:0;padding:66px 96px 104px;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transform:translateY(14px);
+  transition:opacity .5s ease,transform .5s ease,visibility 0s linear .5s;z-index:1}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .5s ease,transform .5s ease,visibility 0s;z-index:2}
+@media (prefers-reduced-motion:reduce){.slide,.slide.active{transition:none}}
+
+.head{margin-bottom:22px}
+.eyebrow{font:700 17px var(--f-head);letter-spacing:.16em;text-transform:uppercase;color:var(--coral);margin-bottom:8px}
+h2{font:700 50px/1.15 var(--f-head);color:var(--navy);letter-spacing:-.01em}
+.sub{font-size:24px;color:var(--teal);margin-top:8px;font-weight:500}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px;min-height:0}
+.body.center{align-items:center}
+.thai{font-family:var(--f-thai)}
+
+/* =========================================================
+   THAI WORD BLOCK: Thai (large) / romanization (teal) / English (gray)
+   ========================================================= */
+.word{display:flex;flex-direction:column;align-items:center;text-align:center}
+.word.left{align-items:flex-start;text-align:left}
+.th-row{display:flex;align-items:center;gap:14px}
+.th{font-family:var(--f-thai);font-weight:600;color:var(--navy);line-height:1.45}
+.rom{color:var(--teal);font-weight:500;line-height:1.3}
+.en{color:var(--text);line-height:1.3;margin-top:2px}
+.hl{color:var(--coral)}
+.word.xl .th{font-size:110px}.word.xl .rom{font-size:38px}.word.xl .en{font-size:30px}
+.word.l .th{font-size:70px} .word.l .rom{font-size:30px} .word.l .en{font-size:25px}
+.word.m .th{font-size:50px} .word.m .rom{font-size:25px} .word.m .en{font-size:21px}
+.word.ms .th{font-size:42px}.word.ms .rom{font-size:23px}.word.ms .en{font-size:20px}
+.word.s .th{font-size:36px} .word.s .rom{font-size:21px} .word.s .en{font-size:19px}
+.word.xs .th{font-size:28px}.word.xs .rom{font-size:18px}.word.xs .en{font-size:17px}
+
+/* Romanization toggle (T key) */
+body.no-rom .rom{visibility:hidden}
+
+/* Listen button: hidden unless a Thai voice exists */
+.listen{display:none;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;
+  background:rgba(244,124,107,.13);color:var(--coral);align-items:center;justify-content:center;transition:background .2s,color .2s,transform .15s}
+.listen:hover{background:var(--coral);color:#fff;transform:scale(1.06)}
+.listen.speaking{background:var(--coral);color:#fff}
+body.has-voice .listen{display:inline-flex}
+.word.s .listen,.word.xs .listen,.num-card .listen{width:38px;height:38px}
+.word.s .listen svg,.word.xs .listen svg,.num-card .listen svg{width:18px;height:18px}
+
+/* =========================================================
+   CARDS, GRIDS, NOTES
+   ========================================================= */
+.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+.grid{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:22px}
+.note{background:#fff;border-left:6px solid var(--coral);border-radius:18px;padding:16px 24px;font-size:22px;
+  box-shadow:var(--shadow);line-height:1.45}
+.note .thai{font-weight:600;color:var(--navy)}
+.icon{font-size:40px;line-height:1;margin-bottom:8px}
+
+/* Number cards */
+.num-card{display:flex;flex-direction:column;align-items:center;padding:18px 18px 20px;text-align:center}
+.card-top{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:40px}
+.digit{font:800 32px var(--f-head);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.num-card .th{font-size:50px;margin-top:4px}
+.num-card .rom{font-size:24px}
+.num-card.compact .th{font-size:42px}
+.num-card.compact .rom{font-size:21px}
+
+/* Pattern slide */
+.pattern-row{display:flex;gap:28px}
+.pgroup{display:flex;flex-direction:column;gap:12px;min-width:0}
+.glabel{font:700 21px var(--f-head);color:var(--teal)}
+.glabel .thai,.tip-text .thai{color:var(--coral)}
+.tip-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;background:var(--grad-soft),#fff}
+.tip-label{font:800 30px var(--f-head);color:var(--navy)}
+.tip-text{font-size:20px}
+
+/* Reveal interaction */
+.reveal{cursor:pointer;display:flex;flex-direction:column;transition:transform .15s,box-shadow .2s;outline:none}
+.reveal:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(11,42,91,.12)}
+.reveal:focus-visible{box-shadow:0 0 0 4px rgba(20,163,160,.4),var(--shadow)}
+.prompt{text-align:center}
+.prompt-en{font:700 32px/1.25 var(--f-head);color:var(--navy)}
+.prompt-big{font:800 46px var(--f-head);color:var(--navy)}
+.prompt-hint{font-size:19px;color:#6B7280;margin-top:4px}
+.answer{position:relative;margin-top:16px;flex:1;display:flex;align-items:center;justify-content:center;min-height:110px}
+.answer-inner{opacity:0;filter:blur(8px);transition:opacity .4s,filter .4s;width:100%;display:flex;flex-direction:column;align-items:center}
+.cover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px;
+  border:2px dashed rgba(20,163,160,.45);border-radius:20px;background:rgba(20,163,160,.05);
+  color:var(--teal);font:600 21px var(--f-body);transition:opacity .3s}
+.cover::before{content:"👆"}
+.reveal.shown .answer-inner{opacity:1;filter:none}
+.reveal.shown .cover{opacity:0;pointer-events:none}
+
+/* Title slide */
+.slide-title{justify-content:center;padding-left:120px}
+.kicker{display:inline-flex;align-self:flex-start;background:#fff;border-radius:999px;padding:10px 24px;color:var(--teal);
+  font:600 20px var(--f-body);box-shadow:var(--shadow)}
+.slide-title h1{font:800 82px/1.08 var(--f-head);color:var(--navy);margin:30px 0 22px;max-width:900px;letter-spacing:-.02em}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.title-sub{font-size:26px;color:var(--text);max-width:760px}
+.keys{display:flex;flex-wrap:wrap;gap:22px;margin-top:44px;font-size:18px;color:#6B7280}
+kbd{display:inline-block;min-width:32px;padding:3px 9px;margin-right:6px;border-radius:8px;background:#fff;border:1px solid #E2DED8;
+  box-shadow:0 2px 0 #E2DED8;font:600 16px var(--f-body);color:var(--navy);text-align:center}
+.title-art{position:absolute;right:110px;top:150px;width:400px;height:560px}
+.float-card{position:absolute;background:#fff;border-radius:26px;box-shadow:var(--shadow);padding:20px 30px;text-align:center;animation:float 6s ease-in-out infinite}
+.float-card .th{font-size:56px}.float-card .rom{font-size:21px}
+.f0{right:0;top:0;transform:rotate(4deg)}
+.f1{left:0;top:200px;animation-delay:-2s}
+.f2{right:20px;top:400px;animation-delay:-4s}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -12px}}
+
+/* Goal slide */
+.goal-text{font:600 46px/1.35 var(--f-head);color:var(--navy);max-width:1300px}
+.goal-text .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.goal-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.goal-label{font:700 26px var(--f-head);color:var(--navy);margin-bottom:4px}
+
+/* Drill slide */
+.drill-wrap{display:flex;align-items:center;gap:80px}
+.big-digit{font:800 260px/1 var(--f-head);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;min-width:420px;text-align:center}
+.drill-reveal{width:560px;min-height:330px;justify-content:center}
+
+/* Vocab cards */
+.vocab-card{display:flex;flex-direction:column;align-items:center;padding:20px}
+
+/* Q&A cards + formula */
+.qa-label{font:700 16px var(--f-head);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.qa-card.A{border-top:6px solid var(--navy)} .qa-card.A .qa-label{color:var(--navy)}
+.qa-card.B{border-top:6px solid var(--teal)} .qa-card.B .qa-label{color:var(--teal)}
+.qa-card.B .th{color:var(--teal)}
+.formula{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.fchip{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:10px 24px;text-align:center;border:2px solid transparent}
+.fchip .th{font-size:38px}.fchip .rom{font-size:19px}.fchip .en{font-size:16px;color:#6B7280;text-transform:uppercase;letter-spacing:.06em}
+.fchip.hl-chip{border-color:var(--coral);background:#FFF5F3}
+.fchip.hl-chip .th{color:var(--coral)}
+.plus{font:800 36px var(--f-head);color:var(--teal)}
+
+/* Clock */
+.clock-layout{display:flex;align-items:center;justify-content:center;gap:90px}
+.clock{position:relative;width:420px;height:420px;border-radius:50%;background:#fff;flex-shrink:0;
+  box-shadow:var(--shadow),inset 0 0 0 16px #fff,inset 0 0 0 21px rgba(20,163,160,.25)}
+.tick{position:absolute;left:50%;top:0;width:4px;height:50%;margin-left:-2px;transform-origin:50% 100%}
+.tick::before{content:"";position:absolute;top:34px;left:0;width:4px;height:16px;border-radius:2px;background:#CBD3DE}
+.tick.major::before{height:26px;width:6px;left:-1px;background:var(--navy)}
+.clock-num{position:absolute;transform:translate(-50%,-50%);font:700 34px var(--f-head);color:var(--navy)}
+.hand{position:absolute;left:50%;bottom:50%;transform-origin:50% 100%;border-radius:10px}
+.hand.hour{width:14px;height:112px;margin-left:-7px;background:var(--navy)}
+.hand.min{width:8px;height:160px;margin-left:-4px;background:var(--coral)}
+.pin{position:absolute;left:50%;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;background:var(--teal);border:6px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.clock-side{display:flex;flex-direction:column;gap:20px;width:600px}
+.digital{font:800 110px/1 var(--f-head);color:var(--navy);display:flex;align-items:baseline;gap:16px}
+.digital .period{font-size:40px;color:var(--teal)}
+.digital-label{font-size:22px;color:#6B7280;margin-top:-8px}
+.tip{font-size:21px;color:var(--text)} .tip .thai{color:var(--coral);font-weight:600}
+
+/* Question words */
+.qw-card{display:flex;flex-direction:column;align-items:center;padding:24px 16px}
+.divider{width:60%;height:3px;border-radius:3px;background:var(--grad);opacity:.5;margin:14px 0 10px}
+.ex-label{font:700 14px var(--f-head);letter-spacing:.14em;text-transform:uppercase;color:#9AA1AC;margin-bottom:4px}
+
+/* Question pattern */
+.qp-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.qp-formula{display:flex;align-items:flex-start;gap:12px}
+.qp-part{display:flex;flex-direction:column;align-items:center}
+.qp-part .th{font-size:30px}.qp-part small{font-size:15px;color:#6B7280}
+.qp-part.q .th{color:var(--coral)}
+.qp-formula .plus{font-size:26px;margin-top:6px}
+.qp-card .arrow{color:var(--teal);font-size:22px;line-height:1}
+.qp-card.accent{border:3px solid var(--coral);background:#FFF8F6}
+.qp-label{font:700 15px var(--f-head);letter-spacing:.12em;text-transform:uppercase;color:var(--coral)}
+
+/* Prices */
+.price-top{display:grid;grid-template-columns:1.25fr 1fr .8fr;gap:22px}
+.price-tag{display:flex;align-items:center;justify-content:center;gap:14px}
+.pemoji{font-size:44px}.pname{font:600 26px var(--f-head);color:var(--text)}
+.pprice{font:800 40px var(--f-head);color:var(--coral)}
+.mini-vocab{display:flex;flex-direction:column;justify-content:center;gap:10px}
+
+/* Repeat (Q&A rows) */
+.qa-rows{display:flex;flex-direction:column;gap:18px}
+.row-reveal{flex-direction:row;align-items:center;gap:30px;padding:18px 28px}
+.row-reveal .prompt{flex:0 0 470px;text-align:left}
+.row-reveal .answer{margin-top:0;min-height:100px}
+.row-reveal .answer-inner{flex-direction:row;justify-content:space-around;gap:20px}
+.qa-prompt{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;align-items:center;font:600 24px var(--f-head);color:var(--navy)}
+.tag{display:inline-grid;place-items:center;min-width:38px;height:38px;padding:0 10px;border-radius:12px;color:#fff;font:800 18px var(--f-head)}
+.tag.A{background:var(--navy)}.tag.B{background:var(--teal)}
+
+/* Role play */
+.rp-layout{display:grid;grid-template-columns:1fr 390px;gap:36px;align-items:center}
+.dialogue{display:flex;flex-direction:column;gap:14px}
+.line{display:flex;gap:16px;align-items:flex-start;max-width:90%}
+.line.B{align-self:flex-end;flex-direction:row-reverse}
+.avatar{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 22px var(--f-head);flex-shrink:0;box-shadow:var(--shadow)}
+.line.A .avatar{background:var(--navy)} .line.B .avatar{background:var(--teal)}
+.bubble{background:#fff;border-radius:24px;padding:12px 24px;box-shadow:var(--shadow);border:2px solid rgba(11,42,91,.12)}
+.line.A .bubble{border-top-left-radius:6px}
+.line.B .bubble{border-top-right-radius:6px;background:#EBF7F6;border-color:rgba(20,163,160,.3)}
+.line.A .th{color:var(--navy)} .line.B .th{color:var(--teal)}
+.step{opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.step.on{opacity:1;transform:none}
+.btn{align-self:flex-start;background:var(--coral);color:#fff;border:none;border-radius:999px;padding:12px 28px;font:600 20px var(--f-body);
+  cursor:pointer;box-shadow:0 8px 20px rgba(244,124,107,.35);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.step-btn.done{visibility:hidden}
+.polite{display:flex;flex-direction:column;gap:16px;background:var(--grad-soft),#fff}
+.polite-title{font:700 24px var(--f-head);color:var(--navy)}
+.scenario{font-size:19px;color:#6B7280;margin-top:-8px}
+.polite-row{display:flex;flex-direction:column;gap:6px;background:#fff;border-radius:18px;padding:12px 16px}
+.polite-who{font:700 18px var(--f-head);color:var(--teal)}
+.polite-pair{display:flex;justify-content:space-around}
+
+/* Your turn */
+.turn-card .prompt{display:flex;flex-direction:column;align-items:center}
+.task{font:700 30px var(--f-head);color:var(--navy)}
+.turn-card .answer-inner{align-items:flex-start;gap:6px}
+.mini-divider{height:2px;width:100%;background:rgba(20,163,160,.2);margin:6px 0}
+
+/* Recap chips */
+.recap{gap:16px;justify-content:flex-start}
+.sec-label{font:700 16px var(--f-head);letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.chips{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:10px}
+.chip{position:relative;background:#fff;border-radius:16px;box-shadow:0 4px 14px rgba(11,42,91,.06);padding:8px 10px;text-align:center}
+.chip .th{font-size:25px;line-height:1.35}.chip .rom{font-size:15px}.chip .en{font-size:14px}
+.chip-digit{font:800 16px var(--f-head);color:var(--coral)}
+.say-icon{display:none;position:absolute;top:6px;right:8px;color:var(--coral);opacity:.6}
+.say-icon svg{width:14px;height:14px}
+body.has-voice .chip{cursor:pointer} body.has-voice .say-icon{display:block}
+body.has-voice .chip:hover{box-shadow:0 0 0 2px var(--coral)}
+.recap-bottom{display:grid;grid-template-columns:5fr 3fr;gap:26px}
+
+/* Homework */
+.hw-card{display:flex;flex-direction:column;gap:12px;padding:34px}
+.hw-icon{font-size:52px}
+.hw-title{font:700 32px/1.25 var(--f-head);color:var(--navy)}
+.hw-text{font-size:22px;line-height:1.5}
+.hw-big{font:800 64px var(--f-head);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hw-ex{display:flex;flex-direction:column;gap:8px}
+.hw-ex-row{display:flex;align-items:center;gap:14px}
+.hw-ex-row .tag{background:var(--teal);font-size:15px;min-width:74px}
+
+/* Closing */
+.slide-closing{align-items:center;justify-content:center;text-align:center}
+.closing-badge{font-size:80px;margin-bottom:10px}
+.slide-closing h1{font:800 120px/1.05 var(--f-head);letter-spacing:-.02em}
+.closing-sub{font:600 46px var(--f-head);color:var(--navy);margin:16px 0 36px}
+.closing-card{padding:20px 50px}
+
+/* =========================================================
+   TEACHER NOTES PANEL (N) + TOAST
+   ========================================================= */
+#notes{position:fixed;left:50%;bottom:18px;width:min(920px,94vw);transform:translate(-50%,calc(100% + 40px));
+  background:#fff;border-radius:22px;box-shadow:0 20px 60px rgba(11,42,91,.25);padding:18px 26px 22px;z-index:50;
+  transition:transform .35s ease;border-top:6px solid var(--teal)}
+#notes.open{transform:translate(-50%,0)}
+.notes-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;
+  font:700 15px var(--f-head);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.notes-close{border:none;background:none;font-size:26px;line-height:1;cursor:pointer;color:#9AA1AC}
+#notes-text{font-size:19px;line-height:1.55;color:var(--text)}
+#toast{position:fixed;top:24px;left:50%;transform:translate(-50%,-20px);opacity:0;background:var(--navy);color:#fff;
+  padding:10px 22px;border-radius:999px;font:600 16px var(--f-body);z-index:60;transition:opacity .25s,transform .25s;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div id="progress"><div id="progress-fill"></div></div>
+  <main id="slides"></main>
+  <div class="wordmark">Speako</div>
+  <nav class="controls" aria-label="Slide navigation">
+    <button class="nav-btn" data-action="prev" aria-label="Previous slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div id="counter">1 / 1</div>
+    <button class="nav-btn" data-action="next" aria-label="Next slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </nav>
+</div>
+
+<aside id="notes" aria-live="polite">
+  <div class="notes-head"><span>Teacher notes · <span id="notes-slide"></span></span><button class="notes-close" data-action="notes" aria-label="Close notes">×</button></div>
+  <div id="notes-text"></div>
+</aside>
+<div id="toast"></div>
+
+<script>
+/* =====================================================================
+   1. LESSON CONTENT — edit words here.
+      Every Thai item: { th: Thai script, rom: romanization, en: meaning }
+      Wrap text in [[double brackets]] to highlight it in coral.
+   ===================================================================== */
+const VOCAB = {
+  numbers: [
+    { th:'ศูนย์',      rom:'sǔun',        en:'0' },
+    { th:'หนึ่ง',      rom:'nùeng',       en:'1' },
+    { th:'สอง',       rom:'sǎawng',      en:'2' },
+    { th:'สาม',       rom:'sǎam',        en:'3' },
+    { th:'สี่',        rom:'sìi',         en:'4' },
+    { th:'ห้า',        rom:'hâa',         en:'5' },
+    { th:'หก',        rom:'hòk',         en:'6' },
+    { th:'เจ็ด',       rom:'jèt',         en:'7' },
+    { th:'แปด',       rom:'bpàaet',      en:'8' },
+    { th:'เก้า',       rom:'gâao',        en:'9' },
+    { th:'สิบ',        rom:'sìp',         en:'10' },
+    { th:'สิบเอ็ด',     rom:'sìp-èt',      en:'11' },
+    { th:'สิบสอง',     rom:'sìp-sǎawng',  en:'12' },
+    { th:'สิบสาม',     rom:'sìp-sǎam',    en:'13' },
+    { th:'สิบสี่',      rom:'sìp-sìi',     en:'14' },
+    { th:'สิบห้า',      rom:'sìp-hâa',     en:'15' },
+    { th:'สิบหก',      rom:'sìp-hòk',     en:'16' },
+    { th:'สิบเจ็ด',     rom:'sìp-jèt',     en:'17' },
+    { th:'สิบแปด',     rom:'sìp-bpàaet',  en:'18' },
+    { th:'สิบเก้า',     rom:'sìp-gâao',    en:'19' },
+    { th:'ยี่สิบ',      rom:'yîi-sìp',     en:'20' },
+    { th:'ยี่สิบเอ็ด',   rom:'yîi-sìp-èt',  en:'21' },
+    { th:'สามสิบ',     rom:'sǎam-sìp',    en:'30' },
+    { th:'สี่สิบ',      rom:'sìi-sìp',     en:'40' },
+    { th:'ห้าสิบ',      rom:'hâa-sìp',     en:'50' },
+    { th:'หนึ่งร้อย',    rom:'nùeng-rááwy', en:'100' },
+    { th:'หนึ่งพัน',    rom:'nùeng-phan',  en:'1,000' },
+  ],
+  timePrice: [
+    { th:'เช้า',     rom:'cháao',         en:'morning',   icon:'🌅' },
+    { th:'เที่ยง',    rom:'thîang',        en:'noon',      icon:'☀️' },
+    { th:'บ่าย',     rom:'bàai',          en:'afternoon', icon:'🌤️' },
+    { th:'เย็น',     rom:'yen',           en:'evening',   icon:'🌇' },
+    { th:'กลางคืน',  rom:'glaang-khuuen', en:'night',     icon:'🌙' },
+    { th:'ชั่วโมง',   rom:'chûa-moong',    en:'hour',      icon:'⏳' },
+    { th:'นาที',     rom:'naa-thii',      en:'minute',    icon:'⏱️' },
+    { th:'โมง',      rom:'moong',         en:"o'clock",   icon:'🕖' },
+    { th:'ราคา',     rom:'raa-khaa',      en:'price',     icon:'🏷️' },
+    { th:'บาท',      rom:'bàat',          en:'baht',      icon:'💵' },
+  ],
+  questions: [
+    { th:'อะไร',     rom:'à-rai',     en:'what' },
+    { th:'ที่ไหน',    rom:'thîi-nǎi',  en:'where' },
+    { th:'ใคร',      rom:'khrai',     en:'who' },
+    { th:'เท่าไหร่',  rom:'thâo-rài',  en:'how much' },
+    { th:'กี่โมง',    rom:'gìi moong', en:'what time' },
+    { th:'ไหม',      rom:'mái',       en:'yes/no question particle' },
+  ],
+  phrases: {
+    whatTime: { th:'ตอนนี้กี่โมง',        rom:'dtaawn-níi gìi moong',       en:'What time is it now?' },
+    sevenAm:  { th:'ตอนนี้เจ็ดโมงเช้า',    rom:'dtaawn-níi jèt moong cháao', en:"It's 7 in the morning." },
+    whatThis: { th:'นี่คืออะไร',          rom:'nîi khuue à-rai',            en:'What is this?' },
+    howMuch:  { th:'นี่เท่าไหร่',          rom:'nîi thâo-rài',               en:'How much is this?' },
+    fifty:    { th:'ห้าสิบบาท',          rom:'hâa-sìp bàat',               en:'50 baht' },
+    where:    { th:'คุณอยู่ที่ไหน',        rom:'khun yùu thîi-nǎi',          en:'Where are you / where do you live?' },
+    bangkok:  { th:'ผม/ฉันอยู่กรุงเทพ',    rom:'phǒm/chǎn yùu grung-thêep',  en:"I'm in / I live in Bangkok." },
+    who:      { th:'นั่นใคร',            rom:'nân khrai',                  en:'Who is that?' },
+  },
+};
+
+/* Small lookup helpers used inside SLIDES below */
+const num  = en => VOCAB.numbers.find(n => n.en === en);
+const tp   = en => VOCAB.timePrice.find(n => n.en === en);
+const qw   = en => VOCAB.questions.find(n => n.en === en);
+const P    = VOCAB.phrases;
+/* mark(item, thaiPart, romPart): returns a copy with those parts highlighted in coral */
+const mark = (it, thPart, romPart) => ({ ...it,
+  th:  it.th.replace(thPart, `[[${thPart}]]`),
+  rom: romPart ? it.rom.replace(romPart, `[[${romPart}]]`) : it.rom });
+
+/* Politeness reminder shown on both role-play slides */
+const POLITENESS = {
+  men:   { th:'ครับ', rom:'khráp', en:'end every sentence' },
+  womenStatement: { th:'ค่ะ', rom:'khâ', en:'statements' },
+  womenQuestion:  { th:'คะ',  rom:'khá', en:'questions' },
+};
+
+/* =====================================================================
+   2. SLIDES — one object per slide (in order). "notes" = teacher notes (N).
+   ===================================================================== */
+const SLIDES = [
+  { type:'title',
+    kicker:'Speako · Beginner Thai · 1-on-1',
+    title:'Lesson 3:', subtitle:'Numbers, Time, and Basic Questions',
+    tagline:'Count, tell the time, and ask simple questions in Thai.',
+    art:[ { th:'หนึ่ง', rom:'nùeng · 1' }, { th:'กี่โมง', rom:'gìi moong · what time' }, { th:'เท่าไหร่', rom:'thâo-rài · how much' } ],
+    notes:'Welcome the student and warm up with small talk from Lesson 1. Today: numbers, time, and question words. Keys: T hides romanization, R reveals all answers on a slide, F is fullscreen.' },
+
+  { type:'review', eyebrow:'Warm-up', title:'Quick review: Lesson 2',
+    subtitle:'Say it in Thai first, then click to check.',
+    items:[
+      { prompt:'My name is …',     th:'ผม/ฉันชื่อ...',     rom:'phǒm/chǎn chûue ...' },
+      { prompt:"I'm from …",       th:'ผม/ฉันมาจาก...',   rom:'phǒm/chǎn maa jàak ...' },
+      { prompt:'Nice to meet you', th:'ยินดีที่ได้รู้จัก',     rom:'yin-dii thîi dâai rúu-jàk' },
+    ],
+    note:'Men say ผม (phǒm). Women say ฉัน (chǎn).',
+    notes:'Let the student try each phrase before you reveal it. Then ask them to do a full self-introduction using their real name and country.' },
+
+  { type:'goal', eyebrow:"Today's goal", title:'What you will learn',
+    text:'By the end of this lesson you will be able to [[count]], [[tell the time]], and [[ask simple questions]] in Thai',
+    pills:[
+      { icon:'🔢', label:'Count',          th:'หนึ่ง สอง สาม', rom:'nùeng sǎawng sǎam' },
+      { icon:'🕐', label:'Tell the time',  th:'กี่โมง',        rom:'gìi moong' },
+      { icon:'❓', label:'Ask questions',  th:'อะไร ที่ไหน',    rom:'à-rai thîi-nǎi' },
+    ],
+    notes:'Set expectations: count to 20 and beyond, tell the time on the hour, and ask what / where / who / how much / what time.' },
+
+  { type:'grid', eyebrow:'Numbers', title:'Numbers 0 to 10', subtitle:'Listen, repeat, then point and say.',
+    cols:6, items: VOCAB.numbers.slice(0, 11),
+    notes:'Model each number twice; the student repeats. Watch the tones: สี่ (sìi, low) and ห้า (hâa, falling). Then point at random cards and have the student say them.' },
+
+  { type:'grid', eyebrow:'Numbers', title:'Numbers 11 to 20', subtitle:'Easy pattern: สิบ (10) + number',
+    cols:5, items: VOCAB.numbers.slice(11, 21).map(n => mark(n, 'สิบ', 'sìp')),
+    note:'Pattern: [[สิบ]] + number → สิบ + สอง = สิบสอง (12). Watch out: 11 is สิบเอ็ด (not สิบหนึ่ง), and 20 is ยี่สิบ (not สองสิบ).',
+    notes:'Show how 11–19 = สิบ + number. Point out the two exceptions: สิบเอ็ด and ยี่สิบ. Count 11–20 together, then backwards.' },
+
+  { type:'pattern', eyebrow:'Numbers', title:'Bigger numbers', subtitle:'Tens follow the pattern: number + สิบ',
+    groups:[
+      { label:'Tens = number + สิบ', items:['20','30','40','50'].map(e => mark(num(e), 'สิบ', 'sìp')) },
+      { label:'100 and 1,000',      items:[ mark(num('100'), 'ร้อย', 'rááwy'), mark(num('1,000'), 'พัน', 'phan') ] },
+    ],
+    tips:[
+      { label:'11', item: mark(num('11'), 'เอ็ด', 'èt'),  text:'not สิบหนึ่ง' },
+      { label:'20', item: mark(num('20'), 'ยี่', 'yîi'),  text:'not สองสิบ' },
+      { label:'21', item: mark(num('21'), 'เอ็ด', 'èt'),  text:'Numbers ending in 1 (21, 31…) use เอ็ด' },
+    ],
+    notes:'Highlight the tens pattern (number + สิบ) and the units ร้อย (hundred) and พัน (thousand). Challenge: 35? 42? (สามสิบห้า, สี่สิบสอง).' },
+
+  /* Expands into several "What number is this?" slides in random order */
+  { type:'numberDrill', title:'What number is this?', count:6,
+    pool:['3','7','9','11','14','18','20','21','40','100'],
+    notes:'The student says the number in Thai, then click to reveal. The order is shuffled every time the deck loads.' },
+
+  { type:'vocab', eyebrow:'Time', title:'Time words', subtitle:'Parts of the day and units of time',
+    cols:4, items: VOCAB.timePrice.slice(0, 8),
+    note:'โมง = o\'clock (telling the time) · ชั่วโมง = hour (how long something takes)',
+    notes:'Use gestures for the parts of the day (sunrise, sun overhead, sunset, sleeping). Contrast โมง (time on the clock) with ชั่วโมง (duration).' },
+
+  { type:'qa', eyebrow:'Telling the time', title:'What time is it?',
+    q: P.whatTime, a: P.sevenAm,
+    formula:[
+      { th:'ตอนนี้', rom:'dtaawn-níi', en:'now' },
+      { th:'เจ็ด',   rom:'jèt',        en:'number', hl:true },
+      { th:'โมง',    rom:'moong',      en:"o'clock" },
+      { th:'เช้า',   rom:'cháao',      en:'part of the day', hl:true },
+    ],
+    note:'Thai has a traditional time system. For beginners, number + โมง + part of the day is enough.',
+    notes:'Drill the question first, then the answer. Swap the coral parts to make new times. Mention the traditional system exists, but don\'t go deeper today.' },
+
+  { type:'clock', eyebrow:'Clock practice · 1 / 4', title:'What time is it?',
+    h:7, m:0, digital:'7:00', period:'a.m.', label:'in the morning',
+    answer:{ th:'เจ็ดโมงเช้า', rom:'jèt moong cháao', en:"7 o'clock in the morning" },
+    tip:'number + โมง + เช้า (morning)',
+    notes:'Ask ตอนนี้กี่โมง? The student answers, then reveal. Encourage adding ตอนนี้ at the start.' },
+  { type:'clock', eyebrow:'Clock practice · 2 / 4', title:'What time is it?',
+    h:12, m:0, digital:'12:00', period:'p.m.', label:'noon',
+    answer:{ th:'เที่ยง', rom:'thîang', en:'noon' },
+    tip:'เที่ยง = 12 noon. No number needed!',
+    notes:'เที่ยง on its own means 12 noon. Students love this one because it is so short.' },
+  { type:'clock', eyebrow:'Clock practice · 3 / 4', title:'What time is it?',
+    h:2, m:0, digital:'2:00', period:'p.m.', label:'in the afternoon',
+    answer:{ th:'บ่ายสองโมง', rom:'bàai sǎawng moong', en:"2 o'clock in the afternoon" },
+    tip:'Afternoon: บ่าย comes first → บ่าย + number + โมง',
+    notes:'Point out that บ่าย goes at the beginning. Keep it light; this is the time used in role play 1.' },
+  { type:'clock', eyebrow:'Clock practice · 4 / 4', title:'What time is it?',
+    h:6, m:0, digital:'6:00', period:'p.m.', label:'in the evening',
+    answer:{ th:'หกโมงเย็น', rom:'hòk moong yen', en:"6 o'clock in the evening" },
+    tip:'number + โมง + เย็น (evening)',
+    notes:'Reveal, then quiz quickly: go back and forth between the four clocks in random order.' },
+
+  { type:'qwords', eyebrow:'Questions', title:'Question words', subtitle:'One word turns a sentence into a question',
+    items:[
+      { word: qw('what'),      ex: P.whatThis },
+      { word: qw('where'),     ex: P.where },
+      { word: qw('who'),       ex: P.who },
+      { word: qw('how much'),  ex: P.howMuch },
+      { word: qw('what time'), ex: P.whatTime },
+    ],
+    notes:'Read each question word, then its example sentence. Point at objects on camera and ask นี่คืออะไร? Have the student ask you too.' },
+
+  { type:'qpattern', eyebrow:'Questions', title:'Question pattern', subtitle:'Statement + question word (it goes where the answer goes)',
+    items:[
+      { base:'นี่คือ',  baseEn:'this is', q:'อะไร',    qEn:'what',      full: mark(P.whatThis, 'อะไร', 'à-rai') },
+      { base:'คุณอยู่', baseEn:'you are at', q:'ที่ไหน', qEn:'where',   full: mark(P.where, 'ที่ไหน', 'thîi-nǎi') },
+      { base:'นั่น',    baseEn:'that', q:'ใคร',         qEn:'who',       full: mark(P.who, 'ใคร', 'khrai') },
+      { base:'นี่',     baseEn:'this', q:'เท่าไหร่',     qEn:'how much',  full: mark(P.howMuch, 'เท่าไหร่', 'thâo-rài') },
+      { base:'ตอนนี้',  baseEn:'now', q:'กี่โมง',       qEn:'what time', full: mark(P.whatTime, 'กี่โมง', 'gìi moong') },
+      { label:'Reminder: yes/no questions', accent:true,
+        base:'สบายดี', baseEn:'well', q:'ไหม', qEn:'yes / no?',
+        full:{ th:'สบายดี[[ไหม]]', rom:'sà-baai-dii [[mái]]', en:'Are you well? (add ไหม at the end)' } },
+    ],
+    notes:'Key idea: Thai keeps statement word order and puts the question word where the answer would go (usually at the end). ไหม at the end makes a yes/no question, as in Lesson 1.' },
+
+  { type:'prices', eyebrow:'Shopping', title:'How much is it?', subtitle:'Answer with a number + บาท',
+    q: P.howMuch,
+    formula:[ { th:'ห้าสิบ', rom:'hâa-sìp', en:'number', hl:true }, { th:'บาท', rom:'bàat', en:'baht' } ],
+    vocab:[ tp('price'), tp('baht') ],
+    items:[
+      { icon:'🥤', name:'Water',   price:'฿20',  th:'ยี่สิบบาท',    rom:'yîi-sìp bàat',     en:'20 baht' },
+      { icon:'🍜', name:'Noodles', price:'฿50',  th:'ห้าสิบบาท',    rom:'hâa-sìp bàat',     en:'50 baht' },
+      { icon:'🥭', name:'Mangoes', price:'฿100', th:'หนึ่งร้อยบาท', rom:'nùeng-rááwy bàat', en:'100 baht' },
+    ],
+    notes:'Play market: the student asks นี่เท่าไหร่? while you point at an item, then says the price before you reveal. Swap roles.' },
+
+  { type:'repeat', eyebrow:'Repeat after me · Numbers', title:'Say it in Thai', cols:3,
+    items:[ '5','12','19','30','100','1,000' ].map(e => ({ prompt:e, ...num(e) })),
+    notes:'Say the number, student repeats, then reveal to check. Speed up on a second round.' },
+  { type:'repeat', eyebrow:'Repeat after me · Time', title:'Say it in Thai', cols:3,
+    items:[
+      { prompt:'7:00 a.m.',   th:'เจ็ดโมงเช้า',  rom:'jèt moong cháao' },
+      { prompt:'12:00 noon',  th:'เที่ยง',       rom:'thîang' },
+      { prompt:'2:00 p.m.',   th:'บ่ายสองโมง',  rom:'bàai sǎawng moong' },
+      { prompt:'6:00 p.m.',   th:'หกโมงเย็น',   rom:'hòk moong yen' },
+      { prompt:'1 hour',      th:'หนึ่งชั่วโมง',  rom:'nùeng chûa-moong' },
+      { prompt:'10 minutes',  th:'สิบนาที',     rom:'sìp naa-thii' },
+    ],
+    notes:'Mix the order: point at prompts randomly. Remind the student that บ่าย goes first.' },
+  { type:'repeatQA', eyebrow:'Repeat after me · Questions & answers', title:'Ask and answer',
+    items:[
+      { q: P.whatTime, a: P.sevenAm },
+      { q: P.howMuch,  a: P.fifty },
+      { q: P.where,    a: P.bangkok },
+    ],
+    notes:'You ask, the student answers; then swap. Reveal to check. Encourage a real answer (their own city, the real time).' },
+
+  { type:'roleplay', eyebrow:'Role play 1', title:'Asking the time',
+    scenario:'📍 On the street: Person A wants to know the time.',
+    lines:[
+      { who:'A', th:'ขอโทษครับ/ค่ะ ตอนนี้กี่โมงครับ/คะ', rom:'khǎaw-thôot khráp/khâ, dtaawn-níi gìi moong khráp/khá', en:'Excuse me, what time is it now?' },
+      { who:'B', th:'ตอนนี้บ่ายสองโมงครับ/ค่ะ',          rom:'dtaawn-níi bàai sǎawng moong khráp/khâ',             en:"It's 2 p.m. now." },
+      { who:'A', th:'ขอบคุณครับ/ค่ะ',                   rom:'khàawp-khun khráp/khâ',                             en:'Thank you.' },
+      { who:'B', th:'ไม่เป็นไรครับ/ค่ะ',                 rom:'mâi bpen rai khráp/khâ',                            en:"You're welcome." },
+    ],
+    notes:'Press → (or Next line) to show each line. Read it, the student repeats, then act it out and swap roles. Check the polite ending: ครับ, or ค่ะ / คะ.' },
+  { type:'roleplay', eyebrow:'Role play 2', title:'Asking the price',
+    scenario:'📍 At a market stall: Person A wants to buy something.',
+    lines:[
+      { who:'A', th:'ขอโทษครับ/ค่ะ นี่เท่าไหร่ครับ/คะ', rom:'khǎaw-thôot khráp/khâ, nîi thâo-rài khráp/khá', en:'Excuse me, how much is this?' },
+      { who:'B', th:'ห้าสิบบาทครับ/ค่ะ',                rom:'hâa-sìp bàat khráp/khâ',                       en:'50 baht.' },
+      { who:'A', th:'ขอบคุณครับ/ค่ะ',                   rom:'khàawp-khun khráp/khâ',                        en:'Thank you.' },
+    ],
+    notes:'Act it out with real objects near the student. Change the price each time (20, 50, 100 baht).' },
+
+  { type:'yourturn', eyebrow:'Your turn', title:'Ask me, then answer me!', subtitle:'Ask each question in Thai, then answer it yourself.',
+    items:[
+      { icon:'⏰', task:'Ask the time',        hint:'What time is it now?', q: P.whatTime, a: P.sevenAm },
+      { icon:'🏷️', task:'Ask the price',       hint:'How much is this?',    q: P.howMuch,  a: P.fifty },
+      { icon:'📍', task:'Ask where they live', hint:'Where do you live?',   q: P.where,    a: P.bangkok },
+    ],
+    notes:'The student asks you; you answer naturally. Then swap. Only reveal the model if they get stuck.' },
+
+  { type:'recap', eyebrow:'Recap', title:'New words from today',
+    notes:'Quick-fire review: point at random words; the student says the meaning. Press T to hide romanization for an extra challenge.' },
+
+  { type:'homework', eyebrow:'Homework', title:'Practice before next lesson',
+    items:[
+      { icon:'🔢', title:'Practice numbers from 1 to 20 aloud.', big:'1 → 20',
+        text:'Count forwards, backwards, and in random order. Count things around you!' },
+      { icon:'✍️', title:'Write 5 simple question-and-answer pairs.',
+        text:'For example, a time question, a price question, a where question:',
+        examples:[ { label:'time', ...P.whatTime }, { label:'price', ...P.howMuch }, { label:'where', ...P.where } ] },
+    ],
+    notes:'Explain the homework. Ask the student to send their 5 Q&A pairs before the next lesson so you can correct them.' },
+
+  { type:'closing', title:'Great work!', subtitle:'See you next lesson!',
+    thai:{ th:'เก่งมาก', rom:'gèng mâak', en:'Excellent! / Very good!' },
+    notes:'Praise specific progress (e.g. tones on numbers). Answer questions and confirm the next lesson time.' },
+];
+
+/* =====================================================================
+   3. HELPERS
+   ===================================================================== */
+const ICON_SPEAKER = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const esc   = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const plain = s => String(s ?? '').replace(/\[\[|\]\]/g, '');
+const hl    = s => esc(s).replace(/\[\[(.+?)\]\]/g, '<span class="hl">$1</span>');
+/* rich(): highlights + wraps Thai runs in the Thai font */
+const rich  = s => hl(s).replace(/[\u0E00-\u0E7F]+/g, m => `<span class="thai">${m}</span>`);
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+const listenBtn = it => `<button class="listen" data-say="${esc(plain(it.th))}" title="Listen" aria-label="Listen">${ICON_SPEAKER}</button>`;
+
+/* Thai word block: Thai + Listen / romanization / English */
+function word(it, size = 'm', o = {}) {
+  return `<div class="word ${size}${o.left ? ' left' : ''}">
+    <div class="th-row"><span class="th">${hl(it.th)}</span>${listenBtn(it)}</div>
+    <div class="rom">${hl(it.rom)}</div>
+    ${it.en && !o.noEn ? `<div class="en">${esc(it.en)}</div>` : ''}
+  </div>`;
+}
+function numCard(it, cls = '') {
+  return `<div class="card num-card ${cls}">
+    <div class="card-top"><span class="digit">${esc(it.en)}</span>${listenBtn(it)}</div>
+    <div class="th">${hl(it.th)}</div><div class="rom">${hl(it.rom)}</div>
+  </div>`;
+}
+function revealCard(prompt, answer, cls = '') {
+  return `<div class="card reveal ${cls}" tabindex="0" role="button" aria-label="Click to reveal the answer">
+    <div class="prompt">${prompt}</div>
+    <div class="answer"><div class="answer-inner">${answer}</div><div class="cover">Click to reveal</div></div>
+  </div>`;
+}
+const note = t => `<div class="note">💡 ${rich(t)}</div>`;
+const head = s => `<header class="head">
+  ${s.eyebrow ? `<div class="eyebrow">${esc(s.eyebrow)}</div>` : ''}
+  <h2>${rich(s.title)}</h2>${s.subtitle ? `<p class="sub">${rich(s.subtitle)}</p>` : ''}</header>`;
+const fchip = f => `<div class="fchip${f.hl ? ' hl-chip' : ''}"><div class="th">${esc(f.th)}</div><div class="rom">${esc(f.rom)}</div><div class="en">${esc(f.en)}</div></div>`;
+const chip = (it, isNum) => `<div class="chip" data-say="${esc(plain(it.th))}">
+  ${isNum ? `<div class="chip-digit">${esc(it.en)}</div>` : ''}
+  <div class="th">${esc(it.th)}</div><div class="rom">${esc(it.rom)}</div>
+  ${isNum ? '' : `<div class="en">${esc(it.en)}</div>`}<span class="say-icon">${ICON_SPEAKER}</span></div>`;
+
+/* =====================================================================
+   4. SLIDE RENDERERS (one per slide "type")
+   ===================================================================== */
+const RENDER = {
+  title: s => `
+    <div class="kicker">${esc(s.kicker)}</div>
+    <h1><span class="grad">${esc(s.title)}</span><br>${esc(s.subtitle)}</h1>
+    <p class="title-sub">${esc(s.tagline)}</p>
+    <div class="keys"><span><kbd>←</kbd><kbd>→</kbd>navigate</span><span><kbd>F</kbd>fullscreen</span>
+      <span><kbd>T</kbd>romanization</span><span><kbd>N</kbd>notes</span><span><kbd>R</kbd>reveal all</span></div>
+    <div class="title-art">${s.art.map((a, i) => `<div class="float-card f${i}"><div class="th">${esc(a.th)}</div><div class="rom">${esc(a.rom)}</div></div>`).join('')}</div>`,
+
+  review: s => head(s) + `<div class="body">
+    <div class="grid" style="--cols:${s.items.length}">
+      ${s.items.map(it => revealCard(`<div class="prompt-en">${esc(it.prompt)}</div>`, word(it, 'm', { noEn: true }))).join('')}
+    </div>${s.note ? note(s.note) : ''}</div>`,
+
+  goal: s => head(s) + `<div class="body">
+    <p class="goal-text">${hl(s.text)}</p>
+    <div class="grid" style="--cols:3">
+      ${s.pills.map(p => `<div class="card goal-card"><div class="icon">${p.icon}</div><div class="goal-label">${esc(p.label)}</div>${word(p, 's', { noEn: true })}</div>`).join('')}
+    </div></div>`,
+
+  grid: s => head(s) + `<div class="body">
+    <div class="grid" style="--cols:${s.cols}">${s.items.map(it => numCard(it)).join('')}</div>
+    ${s.note ? note(s.note) : ''}</div>`,
+
+  pattern: s => head(s) + `<div class="body">
+    <div class="pattern-row">${s.groups.map(g => `
+      <div class="pgroup" style="flex:${g.items.length}"><div class="glabel">${rich(g.label)}</div>
+        <div class="grid" style="--cols:${g.items.length}">${g.items.map(it => numCard(it, 'compact')).join('')}</div></div>`).join('')}
+    </div>
+    <div class="grid" style="--cols:${s.tips.length}">${s.tips.map(t => `
+      <div class="card tip-card"><div class="tip-label">${esc(t.label)}</div>${word(t.item, 's', { noEn: true })}<div class="tip-text">${rich(t.text)}</div></div>`).join('')}
+    </div></div>`,
+
+  drill: s => head(s) + `<div class="body center"><div class="drill-wrap">
+    <div class="big-digit">${esc(s.item.en)}</div>
+    ${revealCard('<div class="prompt-en">Say it in Thai</div>', word(s.item, 'l', { noEn: true }), 'drill-reveal')}
+    </div></div>`,
+
+  vocab: s => head(s) + `<div class="body">
+    <div class="grid" style="--cols:${s.cols}">${s.items.map(it => `<div class="card vocab-card"><div class="icon">${it.icon || ''}</div>${word(it, 'm')}</div>`).join('')}</div>
+    ${s.note ? note(s.note) : ''}</div>`,
+
+  qa: s => head(s) + `<div class="body">
+    <div class="grid" style="--cols:2">
+      <div class="card qa-card A"><div class="qa-label">Question</div>${word(s.q, 'm', { left: true })}</div>
+      <div class="card qa-card B"><div class="qa-label">Answer</div>${word(s.a, 'm', { left: true })}</div>
+    </div>
+    <div class="formula">${s.formula.map(fchip).join('<div class="plus">+</div>')}</div>
+    ${note(s.note)}</div>`,
+
+  clock: s => {
+    const hourDeg = (s.h % 12) * 30 + s.m * 0.5, minDeg = s.m * 6;
+    const ticks = Array.from({ length: 12 }, (_, i) => `<div class="tick${i % 3 === 0 ? ' major' : ''}" style="transform:rotate(${i * 30}deg)"></div>`).join('');
+    const nums = [['12', 50, 21], ['3', 79, 50], ['6', 50, 79], ['9', 21, 50]].map(([n, x, y]) => `<div class="clock-num" style="left:${x}%;top:${y}%">${n}</div>`).join('');
+    return head(s) + `<div class="body"><div class="clock-layout">
+      <div class="clock" aria-label="Clock showing ${esc(s.digital)} ${esc(s.period)}">${ticks}${nums}
+        <div class="hand hour" style="transform:rotate(${hourDeg}deg)"></div>
+        <div class="hand min" style="transform:rotate(${minDeg}deg)"></div><div class="pin"></div></div>
+      <div class="clock-side">
+        <div><div class="digital">${esc(s.digital)}<span class="period">${esc(s.period)}</span></div><div class="digital-label">${esc(s.label)}</div></div>
+        ${revealCard('<div class="prompt-en">Say the time in Thai</div>', word(s.answer, 'l'))}
+        <div class="tip">💡 ${rich(s.tip)}</div>
+      </div></div></div>`;
+  },
+
+  qwords: s => head(s) + `<div class="body">
+    <div class="grid" style="--cols:${s.items.length}">${s.items.map(x => `
+      <div class="card qw-card">${word(x.word, 'ms')}<div class="divider"></div><div class="ex-label">Example</div>${word(x.ex, 'xs')}</div>`).join('')}
+    </div></div>`,
+
+  qpattern: s => head(s) + `<div class="body">
+    <div class="grid" style="--cols:3">${s.items.map(x => `
+      <div class="card qp-card${x.accent ? ' accent' : ''}">
+        ${x.label ? `<div class="qp-label">${esc(x.label)}</div>` : ''}
+        <div class="qp-formula">
+          <div class="qp-part"><span class="th">${esc(x.base)}</span><small>${esc(x.baseEn)}</small></div>
+          <span class="plus">+</span>
+          <div class="qp-part q"><span class="th">${esc(x.q)}</span><small>${esc(x.qEn)}</small></div>
+        </div>
+        <div class="arrow">▼</div>${word(x.full, 's')}
+      </div>`).join('')}
+    </div></div>`,
+
+  prices: s => head(s) + `<div class="body">
+    <div class="price-top">
+      <div class="card qa-card A"><div class="qa-label">Ask</div>${word(s.q, 'm', { left: true })}</div>
+      <div class="card qa-card B"><div class="qa-label">Answer</div><div class="formula">${s.formula.map(fchip).join('<div class="plus">+</div>')}</div></div>
+      <div class="card mini-vocab">${s.vocab.map(v => word(v, 'xs')).join('')}</div>
+    </div>
+    <div class="grid" style="--cols:${s.items.length}">${s.items.map(it => revealCard(
+      `<div class="price-tag"><span class="pemoji">${it.icon}</span><span class="pname">${esc(it.name)}</span><span class="pprice">${esc(it.price)}</span></div>`,
+      word(it, 's'))).join('')}
+    </div></div>`,
+
+  repeat: s => head(s) + `<div class="body">
+    <div class="grid" style="--cols:${s.cols || 3}">${s.items.map(it => revealCard(
+      `<div class="prompt-big">${esc(it.prompt)}</div>`, word(it, 's', { noEn: true }))).join('')}
+    </div></div>`,
+
+  repeatQA: s => head(s) + `<div class="body"><div class="qa-rows">${s.items.map(p => revealCard(
+      `<div class="qa-prompt"><span class="tag A">Q</span><span>${esc(p.q.en)}</span><span class="tag B">A</span><span>${esc(p.a.en)}</span></div>`,
+      `${word(p.q, 's', { noEn: true })}${word(p.a, 's', { noEn: true })}`, 'row-reveal')).join('')}
+    </div></div>`,
+
+  roleplay: s => head(s) + `<div class="body"><div class="rp-layout">
+    <div class="dialogue">
+      ${s.lines.map(l => `<div class="line ${l.who} step"><div class="avatar">${l.who}</div><div class="bubble">${word(l, 's', { left: true })}</div></div>`).join('')}
+      <button class="btn step-btn" data-action="step">Next line →</button>
+    </div>
+    <aside class="card polite">
+      <div class="polite-title">🙏 Be polite!</div>
+      <div class="scenario">${esc(s.scenario)}</div>
+      <div class="polite-row"><div class="polite-who">👨 Men end with</div>${word(POLITENESS.men, 's')}</div>
+      <div class="polite-row"><div class="polite-who">👩 Women end with</div>
+        <div class="polite-pair">${word(POLITENESS.womenStatement, 's')}${word(POLITENESS.womenQuestion, 's')}</div></div>
+    </aside></div></div>`,
+
+  yourturn: s => head(s) + `<div class="body">
+    <div class="grid" style="--cols:${s.items.length}">${s.items.map(it => revealCard(
+      `<div class="icon">${it.icon}</div><div class="task">${esc(it.task)}</div><div class="prompt-hint">${esc(it.hint)}</div>`,
+      `${word(it.q, 's', { left: true })}<div class="mini-divider"></div>${word(it.a, 's', { left: true })}`, 'turn-card')).join('')}
+    </div></div>`,
+
+  recap: s => head(s) + `<div class="body recap">
+    <section><div class="sec-label">Numbers</div><div class="chips" style="--cols:9">${VOCAB.numbers.map(n => chip(n, true)).join('')}</div></section>
+    <div class="recap-bottom">
+      <section><div class="sec-label">Time &amp; prices</div><div class="chips" style="--cols:5">${VOCAB.timePrice.map(n => chip(n)).join('')}</div></section>
+      <section><div class="sec-label">Question words</div><div class="chips" style="--cols:3">${VOCAB.questions.map(n => chip(n)).join('')}</div></section>
+    </div></div>`,
+
+  homework: s => head(s) + `<div class="body">
+    <div class="grid" style="--cols:${s.items.length}">${s.items.map(h => `
+      <div class="card hw-card"><div class="hw-icon">${h.icon}</div>
+        <div class="hw-title">${rich(h.title)}</div>
+        ${h.big ? `<div class="hw-big">${esc(h.big)}</div>` : ''}
+        <div class="hw-text">${rich(h.text)}</div>
+        ${h.examples ? `<div class="hw-ex">${h.examples.map(e => `<div class="hw-ex-row"><span class="tag">${esc(e.label)}</span>${word(e, 'xs', { left: true, noEn: true })}</div>`).join('')}</div>` : ''}
+      </div>`).join('')}
+    </div></div>`,
+
+  closing: s => `<div class="closing-badge">🎉</div>
+    <h1 class="grad">${esc(s.title)}</h1>
+    <p class="closing-sub">${esc(s.subtitle)}</p>
+    <div class="card closing-card">${word(s.thai, 'm')}</div>`,
+};
+
+/* Expand special entries (number drill -> several shuffled slides) */
+function buildDeck(src) {
+  const out = [];
+  src.forEach(s => {
+    if (s.type === 'numberDrill') {
+      const picks = shuffle([...s.pool]).slice(0, s.count);
+      picks.forEach((en, i) => out.push({ type:'drill', eyebrow:`Number drill · ${i + 1} / ${picks.length}`, title:s.title, item:num(en), notes:s.notes }));
+    } else out.push(s);
+  });
+  return out;
+}
+
+/* =====================================================================
+   5. DECK ENGINE: render, navigate, scale, keys, swipe, speech
+   ===================================================================== */
+const deck = buildDeck(SLIDES);
+const $ = id => document.getElementById(id);
+const slidesEl = $('slides');
+slidesEl.innerHTML = deck.map((s, i) =>
+  `<section class="slide slide-${s.type}" data-index="${i}" aria-roledescription="slide" aria-label="Slide ${i + 1}">${RENDER[s.type](s)}</section>`).join('');
+const slideEls = [...slidesEl.children];
+let current = 0;
+
+function go(i) {
+  i = Math.max(0, Math.min(deck.length - 1, i));
+  slideEls[current].classList.remove('active');
+  current = i;
+  slideEls[i].classList.add('active');
+  $('progress-fill').style.width = `${((i + 1) / deck.length) * 100}%`;
+  $('counter').textContent = `${i + 1} / ${deck.length}`;
+  document.querySelector('[data-action="prev"]').disabled = i === 0;
+  document.querySelector('[data-action="next"]').disabled = i === deck.length - 1;
+  $('notes-slide').textContent = `Slide ${i + 1}`;
+  $('notes-text').textContent = deck[i].notes || 'No notes for this slide.';
+  history.replaceState(null, '', `#${i + 1}`);
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+}
+
+/* "Next" first reveals pending role-play lines, then moves on */
+function next() {
+  const pending = slideEls[current].querySelector('.step:not(.on)');
+  if (pending) { revealStep(); return; }
+  go(current + 1);
+}
+const prev = () => go(current - 1);
+function revealStep() {
+  const s = slideEls[current];
+  const pending = s.querySelector('.step:not(.on)');
+  if (pending) pending.classList.add('on');
+  if (!s.querySelector('.step:not(.on)')) s.querySelector('.step-btn')?.classList.add('done');
+}
+function revealAll() {
+  const s = slideEls[current];
+  s.querySelectorAll('.reveal').forEach(r => r.classList.add('shown'));
+  s.querySelectorAll('.step').forEach(r => r.classList.add('on'));
+  s.querySelector('.step-btn')?.classList.add('done');
+}
+
+/* Scale the 1600x900 stage to fit the window (16:9) */
+function fit() {
+  const scale = Math.min(innerWidth / 1600, innerHeight / 900);
+  $('stage').style.transform = `translate(-50%,-50%) scale(${scale})`;
+}
+addEventListener('resize', fit);
+fit();
+
+/* Toast feedback for keyboard toggles */
+let toastTimer;
+function toast(msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 1400);
+}
+function toggleFullscreen() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
+  else document.exitFullscreen?.();
+}
+const toggleNotes = () => $('notes').classList.toggle('open');
+
+/* --- Speech (Web Speech API, Thai voice only) --- */
+let thVoice = null;
+function pickVoice() {
+  if (!('speechSynthesis' in window)) return;
+  const voices = speechSynthesis.getVoices();
+  thVoice = voices.find(v => /^th([-_]|$)/i.test(v.lang)) || null;
+  document.body.classList.toggle('has-voice', !!thVoice);
+}
+if ('speechSynthesis' in window) {
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+  setTimeout(pickVoice, 600); setTimeout(pickVoice, 2000);
+}
+function speak(text, btn) {
+  if (!thVoice) return;
+  /* For "ครับ/ค่ะ" or "ผม/ฉัน" options, read the first form; drop "..." */
+  const clean = text.replace(/ครับ\/ค่ะ|ครับ\/คะ/g, 'ครับ').replace(/ผม\/ฉัน/g, 'ผม').replace(/\.{3}|…/g, '').trim();
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(clean);
+  u.lang = 'th-TH'; u.voice = thVoice; u.rate = 0.8;
+  if (btn) { btn.classList.add('speaking'); u.onend = u.onerror = () => btn.classList.remove('speaking'); }
+  speechSynthesis.speak(u);
+}
+
+/* --- Clicks: listen buttons, nav buttons, reveal cards --- */
+document.addEventListener('click', e => {
+  const say = e.target.closest('[data-say]');
+  if (say) { speak(say.dataset.say, say.classList.contains('listen') ? say : null); return; }
+  const act = e.target.closest('[data-action]');
+  if (act) {
+    const a = act.dataset.action;
+    if (a === 'next') next(); else if (a === 'prev') prev();
+    else if (a === 'step') revealStep(); else if (a === 'notes') toggleNotes();
+    return;
+  }
+  const rv = e.target.closest('.reveal');
+  if (rv) rv.classList.toggle('shown');
+});
+
+/* --- Keyboard --- */
+document.addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  switch (e.key) {
+    case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ':
+      e.preventDefault(); next(); break;
+    case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+      e.preventDefault(); prev(); break;
+    case 'Home': go(0); break;
+    case 'End': go(deck.length - 1); break;
+    case 'f': case 'F': toggleFullscreen(); break;
+    case 't': case 'T': {
+      const hidden = document.body.classList.toggle('no-rom');
+      toast(hidden ? 'Romanization hidden' : 'Romanization shown'); break;
+    }
+    case 'n': case 'N': toggleNotes(); break;
+    case 'r': case 'R': revealAll(); toast('All answers revealed'); break;
+    case 'Enter': {
+      const rv = document.activeElement?.closest?.('.reveal');
+      if (rv) { e.preventDefault(); rv.classList.toggle('shown'); } break;
+    }
+  }
+});
+
+/* --- Touch swipe --- */
+let tx = null, ty = null;
+addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+addEventListener('touchend', e => {
+  if (tx === null) return;
+  const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) (dx < 0 ? next : prev)();
+  tx = ty = null;
+}, { passive: true });
+
+/* Start on the slide in the URL hash (e.g. #5), otherwise slide 1 */
+go((parseInt(location.hash.slice(1), 10) || 1) - 1);
+</script>
+</body>
+</html>
